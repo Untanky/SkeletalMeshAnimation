@@ -1,0 +1,15 @@
+EXECUTABLE= cg_ex2
+CC= g++
+CPPFLAGS= -DEXTRA -O3 -std=c++11
+DEPS= glm/glm.hpp Node.hpp SceneGraph.hpp Robot.hpp Window.hpp Context.hpp InputManager.hpp RotationMode.hpp Control.hpp Debug.hpp 
+OBJ= Node.o SceneGraph.o Robot.o Control.o Window.o Application.o GLSL.o TriangleMesh.o
+LIBS=  -lGL -lglut -lGLEW
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CPPFLAGS)
+
+$(EXECUTABLE): $(OBJ)
+	$(CC) -o $@ $^ $(CPPFLAGS) $(LIBS)
+
+clean:
+	rm -f *.o *~ $(EXECUTABLE)

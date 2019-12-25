@@ -1,0 +1,18 @@
+EXECUTABLE= cg_ex2
+CC= g++
+CPPFLAGS= -DEXTRA -O3 -Wall -Wextra --pedantic -std=c++11  -DGL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED -I/opt/X11/include
+DEPS= glm/glm.hpp Node.hpp Scenegraph.hpp Robot.hpp Context.hpp Window.hpp Control.hpp RotationMode.hpp Debug.hpp 
+OBJ= Node.o SceneGraph.o Robot.o Window.o Control.o GLSL.o TriangleMesh.o Application.o GLError.o
+LDFLAGS = -L/opt/X11/lib
+LIBS= -framework GLUT -framework OpenGL -lglew -lglut
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CPPFLAGS)
+
+$(EXECUTABLE): $(OBJ)
+	$(CC) -o $@ $^ $(CPPFLAGS) $(LDFLAGS) $(LIBS)
+
+.PHONY: clean
+
+clean:
+	rm -f *.o *~ $(EXECUTABLE)
