@@ -1,6 +1,6 @@
 #pragma once
 
-  struct Rotation{
-    enum Mode{EULER, MATRIX};
-  };
+struct Rotation {
+	enum Mode { EULER, MATRIX };
+};
 

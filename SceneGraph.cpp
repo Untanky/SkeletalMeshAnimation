@@ -4,8 +4,8 @@
    version:	   SKELETON CODE
    TODO:           traverse reset
    author:         katrin lang
-                   computer graphics
-                   htw berlin
+				   computer graphics
+				   htw berlin
    ------------------------------------------------------------- */
 
 #include "GLIncludes.hpp"
@@ -21,179 +21,179 @@
 #include "Log.hpp"
 #include "SceneGraph.hpp"
 
-// use this with care
-// might cause name collisions
+   // use this with care
+   // might cause name collisions
 using namespace std;
 using namespace glm;
 
-SceneGraph::SceneGraph(Node *root) 
-  : root(root)	
-  , selected(root)	
-  , rotationMode(Rotation::MATRIX)  
+SceneGraph::SceneGraph(Node* root)
+	: root(root)
+	, selected(root)
+	, rotationMode(Rotation::MATRIX)
 {
-  root->select();
-  
-  colorizeShader.loadVertexShader("shaders/color.vert");
-  colorizeShader.compileVertexShader();
-  colorizeShader.loadFragmentShader("shaders/color.frag");
-  colorizeShader.compileFragmentShader();
-  colorizeShader.bindVertexAttribute("position", TriangleMesh::attribVertex);
-  colorizeShader.link();
+	root->select();
+
+	colorizeShader.loadVertexShader("shaders/color.vert");
+	colorizeShader.compileVertexShader();
+	colorizeShader.loadFragmentShader("shaders/color.frag");
+	colorizeShader.compileFragmentShader();
+	colorizeShader.bindVertexAttribute("position", TriangleMesh::attribVertex);
+	colorizeShader.link();
 }
 
-SceneGraph::~SceneGraph(){
+SceneGraph::~SceneGraph() {
 
-  clear(root);
+	clear(root);
 }
 
-void SceneGraph::setViewMatrix(glm::mat4 viewMatrix){
+void SceneGraph::setViewMatrix(glm::mat4 viewMatrix) {
 
-  this->viewMatrix= viewMatrix;
-  
-  shader->bind();
-  shader->setUniform("viewMatrix", viewMatrix);
-  shader->unbind();
+	this->viewMatrix = viewMatrix;
 
-  colorizeShader.bind();
-  colorizeShader.setUniform("viewMatrix", viewMatrix);
-  colorizeShader.unbind();
+	shader->bind();
+	shader->setUniform("viewMatrix", viewMatrix);
+	shader->unbind();
+
+	colorizeShader.bind();
+	colorizeShader.setUniform("viewMatrix", viewMatrix);
+	colorizeShader.unbind();
 }
 
-void SceneGraph::setProjectionMatrix(glm::mat4 projectionMatrix){
+void SceneGraph::setProjectionMatrix(glm::mat4 projectionMatrix) {
 
-  this->projectionMatrix= projectionMatrix;
-  
-  shader->bind();
-  shader->setUniform("projectionMatrix", projectionMatrix);
-  shader->bind();
+	this->projectionMatrix = projectionMatrix;
 
-  colorizeShader.bind();
-  colorizeShader.setUniform("projectionMatrix", projectionMatrix);
-  colorizeShader.bind();
+	shader->bind();
+	shader->setUniform("projectionMatrix", projectionMatrix);
+	shader->bind();
+
+	colorizeShader.bind();
+	colorizeShader.setUniform("projectionMatrix", projectionMatrix);
+	colorizeShader.bind();
 }
 
-void SceneGraph::setShader(glsl::Shader *shader){
-  this->shader= shader;
+void SceneGraph::setShader(glsl::Shader* shader) {
+	this->shader = shader;
 }
 
 // traverse and draw the scenegraph
 // nothing to do here
 // (see helper function)
-void SceneGraph::traverse(){
+void SceneGraph::traverse() {
 
-traverse(root, mat4(1));
+	traverse(root, mat4(1));
 }
 
 // reset all rotations in the scenegraph
 // nothing to do here
 // (see helper function)
-void SceneGraph::reset(){
-  reset(root);
+void SceneGraph::reset() {
+	reset(root);
 }
 
 // navigation in tree
 // (needed for node selection)
-void SceneGraph::up(){
-  
-  if(selected->getParent() == NULL) return;
-  selected->deselect();
-  selected= selected->getParent();
-  selected->select();
+void SceneGraph::up() {
+
+	if (selected->getParent() == NULL) return;
+	selected->deselect();
+	selected = selected->getParent();
+	selected->select();
 }
 
-void SceneGraph::down(){
-  
-  if(selected->getChild() == NULL) return;
-  selected->deselect();
-  selected= selected->getChild();
-  selected->select();
+void SceneGraph::down() {
+
+	if (selected->getChild() == NULL) return;
+	selected->deselect();
+	selected = selected->getChild();
+	selected->select();
 }
 
-void SceneGraph::left(){
-  
-  if(selected->getPrevious() == NULL) return;
-  selected->deselect();
-  selected= selected->getPrevious();
-  selected->select();
+void SceneGraph::left() {
+
+	if (selected->getPrevious() == NULL) return;
+	selected->deselect();
+	selected = selected->getPrevious();
+	selected->select();
 }
 
-void SceneGraph::right(){
-  
-  if(selected->getNext() == NULL) return;
-  selected->deselect();
-  selected= selected->getNext();
-  selected->select();
+void SceneGraph::right() {
+
+	if (selected->getNext() == NULL) return;
+	selected->deselect();
+	selected = selected->getNext();
+	selected->select();
 }
 
 // setter and getter for rotation mode
-void SceneGraph::setRotationMode(Rotation::Mode mode){
+void SceneGraph::setRotationMode(Rotation::Mode mode) {
 
-  rotationMode= mode;
+	rotationMode = mode;
 }
 
-Rotation::Mode SceneGraph::getRotationMode(void){
+Rotation::Mode SceneGraph::getRotationMode(void) {
 
-return rotationMode;
+	return rotationMode;
 }
 
 // increment / decrement rotation of selected node
-void SceneGraph::rotate(ivec3 angles){
+void SceneGraph::rotate(ivec3 angles) {
 
-selected->rotate(angles);
+	selected->rotate(angles);
 }
 
 
 // traverse and draw the scenegraph from a given node
 // XXX: NEEDS TO BE IMPLEMENTED
-void SceneGraph::traverse(Node *node, mat4 modelMatrix) {
-  
-  if(node == NULL) return;
-  
-  // traverse possible siblings
-  traverse(node->getNext(), modelMatrix);
+void SceneGraph::traverse(Node* node, mat4 modelMatrix) {
 
-  // apply local transformations
-  modelMatrix *= node->transform(rotationMode);
- 
-    shader->bind();
-    shader->setUniform("modelMatrix", modelMatrix*glm::scale(node->dimension));
-    shader->setUniform("normalMatrix", mat3(inverse(transpose(modelMatrix*glm::scale(node->dimension)))));
-    shader->setUniform("material.ambient", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.ambient);
-    shader->setUniform("material.diffuse", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.diffuse);
-    shader->setUniform("material.specular", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.specular);
-    shader->setUniform("material.shininess", node->material.shininess);
-    node->draw();
-    shader->unbind();
-    
-  // continue concatenating transformations
-  // if this node has children
-  if (Node *child = node->getChild()) {
-	traverse(child, modelMatrix);
-  }
+	if (node == NULL) return;
+
+	// traverse possible siblings
+	traverse(node->getNext(), modelMatrix);
+
+	// apply local transformations
+	modelMatrix *= node->transform(rotationMode);
+
+	shader->bind();
+	shader->setUniform("modelMatrix", modelMatrix * glm::scale(node->dimension));
+	shader->setUniform("normalMatrix", mat3(inverse(transpose(modelMatrix * glm::scale(node->dimension)))));
+	shader->setUniform("material.ambient", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.ambient);
+	shader->setUniform("material.diffuse", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.diffuse);
+	shader->setUniform("material.specular", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.specular);
+	shader->setUniform("material.shininess", node->material.shininess);
+	node->draw();
+	shader->unbind();
+
+	// continue concatenating transformations
+	// if this node has children
+	if (Node* child = node->getChild()) {
+		traverse(child, modelMatrix);
+	}
 }
 
-void SceneGraph::clear(Node *node){
+void SceneGraph::clear(Node* node) {
 
-  if(node == NULL) return;
-  clear(node->getNext());
-  clear(node->getChild());
-  delete node;
+	if (node == NULL) return;
+	clear(node->getNext());
+	clear(node->getChild());
+	delete node;
 }
 
 // reset the subtree corresponding 
 // to a given node
 // XXX: NEEDS TO BE IMPLEMENTED
-void SceneGraph::reset(Node* node){
+void SceneGraph::reset(Node* node) {
 
-  // XXX
-	
-  node->reset();
+	// XXX
 
-  if (Node* next = node->getChild())
-	  reset(next);
+	node->reset();
 
-  if (Node* child = node->getChild())
-	  reset(child);
+	if (Node* next = node->getChild())
+		reset(next);
 
-  // END XXX
+	if (Node* child = node->getChild())
+		reset(child);
+
+	// END XXX
 }

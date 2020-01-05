@@ -6,16 +6,16 @@
    version:	   SKELETON CODE
    TODO:           nothing (see Robot.cpp)
    author:         katrin lang
-                   computer graphics
-                   htw berlin
+				   computer graphics
+				   htw berlin
    ------------------------------------------------------------- */
 
 #include "Node.hpp"
 
-class Robot{
+class Robot {
 
 public:
-  
-  // construct robot hierarchy
-  static Node *buildRobot();
+
+	// construct robot hierarchy
+	static Node* buildRobot();
 };

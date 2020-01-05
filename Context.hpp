@@ -10,14 +10,14 @@
    htw berlin
    ------------------------------------------------------------- */
 
-template <class Application> class OpenGLContext{
+template <class Application> class OpenGLContext {
 
 public:
 
-  enum Profile { CORE, COMPATIBILITY };
-    
-  // intialization
-  static void init(int argc, char** argv);
+	enum Profile { CORE, COMPATIBILITY };
+
+	// intialization
+	static void init(int argc, char** argv);
 };
 
 #include "Context.cpp"

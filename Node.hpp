@@ -6,8 +6,8 @@
    version:	   SKELETON CODE
    TODO:           nothing (see Node.cpp)
    author:         katrin lang
-                   computer graphics
-                   htw berlin
+				   computer graphics
+				   htw berlin
    ------------------------------------------------------------- */
 
 #include "glm/glm.hpp"
@@ -50,103 +50,103 @@ using namespace glm;
 //           N    N   N
 //
 
-class Node{
+class Node {
 
 public:
 
-  // constructor
-  // x,y,z: position of node center of mass relative to parent node center
-  // length, height, and width of this body part
-  // jointx, jointy, jointz: x,y,z offset of  rotation axis from center of body part
-  // i.e. for rotation about a "shoulder" as opposed to the center of mass of a glutsolidcube
-  // x,y,z: rotation (in degrees) of node relative to parent node rotation
-  Node(TriangleMesh * mesh,
-       Material material,
-       float x, float y, float z, 
-       float length, float height, float width,
-       float jointx, float jointy, float jointz,
-       float rotx, float roty, float rotz);
+	// constructor
+	// x,y,z: position of node center of mass relative to parent node center
+	// length, height, and width of this body part
+	// jointx, jointy, jointz: x,y,z offset of  rotation axis from center of body part
+	// i.e. for rotation about a "shoulder" as opposed to the center of mass of a glutsolidcube
+	// x,y,z: rotation (in degrees) of node relative to parent node rotation
+	Node(TriangleMesh* mesh,
+		Material material,
+		float x, float y, float z,
+		float length, float height, float width,
+		float jointx, float jointy, float jointz,
+		float rotx, float roty, float rotz);
 
-  // sets the parent of this node
-  void setParent(Node* parent);
-  
-  // scenegraph has access to protected functions
-  friend class SceneGraph;
-  
-  // destructor
-  ~Node();
+	// sets the parent of this node
+	void setParent(Node* parent);
 
-  // transform an individual node
-  // according to its position, 
-  // rotation, and rotation center
-  glm::mat4 transform(Rotation::Mode rotationMode);
+	// scenegraph has access to protected functions
+	friend class SceneGraph;
 
-  // draw an individual node
-  void draw(void);
+	// destructor
+	~Node();
 
-  // increment / decrement Euler rotation
-  void rotate(glm::ivec3 angles);
+	// transform an individual node
+	// according to its position, 
+	// rotation, and rotation center
+	glm::mat4 transform(Rotation::Mode rotationMode);
 
-  glm::mat4 getRotation(void);
-  void setRotation(glm::mat4 r);
-  
-  // return parent / child / siblings
-  Node *getNext();
-  Node *getPrevious();
-  Node *getParent();
-  Node *getChild();
+	// draw an individual node
+	void draw(void);
 
-  // select / deselect node
-  void select();
-  void deselect();
+	// increment / decrement Euler rotation
+	void rotate(glm::ivec3 angles);
 
-  // reset rotation
-  void reset();
+	glm::mat4 getRotation(void);
+	void setRotation(glm::mat4 r);
 
-  const Material material;
+	// return parent / child / siblings
+	Node* getNext();
+	Node* getPrevious();
+	Node* getParent();
+	Node* getChild();
 
-  const glm::vec3 dimension;  // length, height,
-                              // and width 
-                              // of this body part
+	// select / deselect node
+	void select();
+	void deselect();
 
-protected :
-  
-  glm::vec3 position;   // x,y,z position of
-                        // node center relative
-                        // to parent node center
-    
-  glm::vec3 joint;      // x,y,z offset of 
-         		// rotation axis
-                   	// from center of body part
-                        // i.e. for rotation about
-                        // a "shoulder" as opposed
-                        // to the center of mass
-			// of a glutsolidcube
+	// reset rotation
+	void reset();
 
-  const glm::ivec3 initialAngles;  // initial x,y,z rotation
-// (in degrees) of node relative
-// to parent node rotation
+	const Material material;
 
-  glm::ivec3 eulerAngles; // x,y,z rotation (in degrees)
-                          // of node relative
-                          // to parent node rotation
-                          // as euler angles
+	const glm::vec3 dimension;  // length, height,
+								// and width 
+								// of this body part
 
-  glm::mat4 rotationMatrix;    // rotation (in degrees)
-                 	       // of node relative
-                               // to parent node rotation
-                               // accumulated in matrix
+protected:
 
-  
-  // is node selected?
-  bool selected;
-  
-  // siblings
-  Node* next;
-  Node* previous;
-  // parent / child node
-  Node* parent;
-  Node* child;
+	glm::vec3 position;   // x,y,z position of
+						  // node center relative
+						  // to parent node center
 
-  TriangleMesh * mesh;
+	glm::vec3 joint;      // x,y,z offset of 
+				  // rotation axis
+					  // from center of body part
+						  // i.e. for rotation about
+						  // a "shoulder" as opposed
+						  // to the center of mass
+			  // of a glutsolidcube
+
+	const glm::ivec3 initialAngles;  // initial x,y,z rotation
+  // (in degrees) of node relative
+  // to parent node rotation
+
+	glm::ivec3 eulerAngles; // x,y,z rotation (in degrees)
+							// of node relative
+							// to parent node rotation
+							// as euler angles
+
+	glm::mat4 rotationMatrix;    // rotation (in degrees)
+							 // of node relative
+								 // to parent node rotation
+								 // accumulated in matrix
+
+
+	// is node selected?
+	bool selected;
+
+	// siblings
+	Node* next;
+	Node* previous;
+	// parent / child node
+	Node* parent;
+	Node* child;
+
+	TriangleMesh* mesh;
 };

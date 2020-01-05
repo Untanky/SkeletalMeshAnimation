@@ -6,70 +6,70 @@
    version:	   SKELETON CODE
    TODO:           nothing (see SceneGraph.cpp)
    author:         katrin lang
-                   computer graphics
-                   htw berlin
+				   computer graphics
+				   htw berlin
    ------------------------------------------------------------- */
 
 #include "Node.hpp"
 #include "GLSL.hpp"
 
-class SceneGraph{
+class SceneGraph {
 
 public:
-    
-  SceneGraph(Node *root);
 
-  ~SceneGraph();
+	SceneGraph(Node* root);
 
-  // traverse and draw the scenegraph
-  void traverse();
+	~SceneGraph();
 
-  // navigation in tree
-  // (needed for node selection)
-  void up();
-  void down();
-  void left();
-  void right();
+	// traverse and draw the scenegraph
+	void traverse();
 
-  void setViewMatrix(glm::mat4 viewMatrix);
-  void setProjectionMatrix(glm::mat4 projectionMatrix);
+	// navigation in tree
+	// (needed for node selection)
+	void up();
+	void down();
+	void left();
+	void right();
 
-  void setShader(glsl::Shader *shader);
-  
-  // setter and getter for rotation mode
-  void setRotationMode(Rotation::Mode mode);
-  
-  Rotation::Mode getRotationMode(void);
-  
-  // increment / decrement rotation of selected node
-  void rotate(glm::ivec3 angles);
-  
-  // reset all rotations
-  void reset();
+	void setViewMatrix(glm::mat4 viewMatrix);
+	void setProjectionMatrix(glm::mat4 projectionMatrix);
 
-    glsl::Shader *shader;
+	void setShader(glsl::Shader* shader);
+
+	// setter and getter for rotation mode
+	void setRotationMode(Rotation::Mode mode);
+
+	Rotation::Mode getRotationMode(void);
+
+	// increment / decrement rotation of selected node
+	void rotate(glm::ivec3 angles);
+
+	// reset all rotations
+	void reset();
+
+	glsl::Shader* shader;
 
 protected:
 
-  // traverse and draw the scenegraph from a given node
-  void traverse(Node* node, glm::mat4 modelMatrix);
-  
-  // reset all rotations below given node
-  void reset(Node *node);
+	// traverse and draw the scenegraph from a given node
+	void traverse(Node* node, glm::mat4 modelMatrix);
 
-  // destroy all nodes
-  void clear(Node *node);
+	// reset all rotations below given node
+	void reset(Node* node);
 
-  // root node
-  Node *root; 
+	// destroy all nodes
+	void clear(Node* node);
 
-  // currently selected node
-  Node *selected;
-  
-  // rotation mode (extra assignment)
-  Rotation::Mode rotationMode;
+	// root node
+	Node* root;
 
-  glsl::Shader colorizeShader;
-  
-  glm::mat4 viewMatrix, projectionMatrix;
+	// currently selected node
+	Node* selected;
+
+	// rotation mode (extra assignment)
+	Rotation::Mode rotationMode;
+
+	glsl::Shader colorizeShader;
+
+	glm::mat4 viewMatrix, projectionMatrix;
 };
