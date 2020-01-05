@@ -3,18 +3,19 @@
 #include "VBO.h"
 #include <vector>
 
-#define BYTES_PER_FLOAT = 4;
-#define BYTES_PET_INT = 4;
+constexpr auto BYTES_PER_FLOAT = 4;
+constexpr auto BYTES_PET_INT = 4;
 
 class VAO
 {
 public :
-	static VAO create();
+
+	static VAO* create();
 	~VAO();
 
 	const unsigned int id;
 
-	unsigned int getIndexCount() const;
+	inline unsigned int getIndexCount() const { return this->indexCount; }
 
 	void bind(std::vector<unsigned int> attributes);
 
@@ -29,9 +30,9 @@ public :
 private:
 	VAO(const unsigned int id);
 
-	std::vector<VBO> dataVBOs;
+	std::vector<VBO*> dataVBOs;
 
-	VBO indexVBO;
+	VBO* indexVBO;
 
 	unsigned int indexCount;
 

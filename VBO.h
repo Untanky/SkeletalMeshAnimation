@@ -5,10 +5,8 @@
 class VBO
 {
 public:
-	static VBO create();
+	static VBO* create(const int type);
 	~VBO();
-
-	unsigned int getIndexCount() const;
 
 	void bind();
 
@@ -18,8 +16,10 @@ public:
 
 	void storeData(std::vector<int> data);
 
+	void storeData(std::vector<unsigned int> data);
+
 private:
-	VBO(const unsigned int id);
+	VBO(const unsigned int id, const int type);
 
 	const unsigned int id;
 
