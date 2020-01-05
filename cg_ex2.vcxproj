@@ -164,7 +164,10 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scenegraph.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TriangleMesh.cpp" />
+    <ClCompile Include="VAO.cpp" />
+    <ClCompile Include="VBO.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +186,10 @@
     <ClInclude Include="RotationMode.hpp" />
     <ClInclude Include="Debug.hpp" />
     <ClInclude Include="Shaders.hpp" />
+    <ClInclude Include="Texture.hpp" />
     <ClInclude Include="TriangleMesh.hpp" />
+    <ClInclude Include="VAO.h" />
+    <ClInclude Include="VBO.h" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
