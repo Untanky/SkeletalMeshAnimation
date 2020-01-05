@@ -1,32 +1,38 @@
 #pragma once
+
+#include <string>
+
+#include "glm/glm.hpp"
+
 class Joint
 {
 public:
 	Joint(const unsigned int index, const std::string& name, glm::mat4 bindTransform);
 
-	void setParent(Joint parentJoint);
+	void setParent(Joint* parentJoint);
 
-	const glm::mat4 getAnimatedTransform() const;
+	inline const glm::mat4 getAnimatedTransform() const { return this->animatedTransform; }
 
-	void setAnimatedTransform(const glm::mat4 newAnimatedTransform);
+	inline void setAnimatedTransform(const glm::mat4 newAnimatedTransform) { this->animatedTransform = newAnimatedTransform; }
 
-	const glm::mat4 getInverseBindTransform() const;
+	const glm::mat4 getInverseBindTransform() const { return this->inverseBindTransform; }
 
 protected:
 	const unsigned int index;
 
 	const std::string& name;
 
-	const Joint* next;
-
-	const Joint* child;
+	Joint* previous;
+	Joint* next;
+	Joint* parent;
+	Joint* child;
 
 	glm::mat4 animatedTransform;
 
 	const glm::mat4 bindTransform;
 
-	const glm::mat4 inverseBindTransform;
+	glm::mat4 inverseBindTransform;
 
-	virtual const glm::mat4 calcInverseBindTransform(const glm::mat4 bindTransform) const;
+	void calcInverseBindTransform(const glm::mat4 bindTransform);
 };
 
