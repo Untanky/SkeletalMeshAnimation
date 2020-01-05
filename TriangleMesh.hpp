@@ -45,7 +45,7 @@ public:
   void setWinding(PolygonWinding winding);
   
   // load the mesh
-  void load(const std::string& filename);
+  virtual void load(const std::string& filename);
 
   // normalize to bounding sphere radius 1
   void unitize(void);
@@ -56,12 +56,12 @@ public:
   // compute bounding box
   void computeBoundingBox(void);
 
-    bool hasNormals(void);
+  bool hasNormals(void);
   // compute the normals of the vertices
   void computeNormals(void);
 
   // draw the model
-  void draw(void);
+  virtual void draw(void);
   
   // vertex attribute bindings
   // see https://www.opengl.org/sdk/docs/tutorials/ClockworkCoders/attributes.php

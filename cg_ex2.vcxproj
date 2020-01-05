@@ -154,10 +154,13 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedMesh.cpp" />
+    <ClCompile Include="AnimatedModelLoader.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="GLError.cpp" />
     <ClCompile Include="GLSL.cpp" />
+    <ClCompile Include="Joint.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scenegraph.cpp" />
@@ -165,12 +168,15 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedMesh.h" />
+    <ClInclude Include="AnimatedModelLoader.h" />
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="Context.hpp" />
     <ClInclude Include="Control.hpp" />
     <ClInclude Include="GLError.hpp" />
     <ClInclude Include="GLIncludes.hpp" />
     <ClInclude Include="GLSL.hpp" />
+    <ClInclude Include="Joint.h" />
     <ClInclude Include="Node.hpp" />
     <ClInclude Include="Robot.hpp" />
     <ClInclude Include="Scenegraph.hpp" />
