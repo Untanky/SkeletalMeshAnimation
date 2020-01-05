@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AnimatedMesh.h"
+
 #include <string>
 
 #include "glm/glm.hpp"
@@ -16,6 +18,12 @@ public:
 	inline void setAnimatedTransform(const glm::mat4 newAnimatedTransform) { this->animatedTransform = newAnimatedTransform; }
 
 	const glm::mat4 getInverseBindTransform() const { return this->inverseBindTransform; }
+
+	inline unsigned int getIndex() const { return this->index; }
+
+	inline const std::string& getName() const { return this->name; }
+
+	friend class AnimatedMesh;
 
 protected:
 	const unsigned int index;

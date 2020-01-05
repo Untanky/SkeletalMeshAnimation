@@ -12,16 +12,16 @@ public:
 	~AnimatedMesh();
 
 	// returns the model 
-	VAO* getModel() const;
+	inline const VAO* getModel() const { return this->model; }
 
 	// returns the texture
-	Texture* getTexture() const;
+	inline const Texture* getTexture() const { return this->texture; }
 
 	// returns the joints
-	Joint* getRootJoint() const;
+	inline const Joint* getRootJoint() const { return this->rootJoint; }
 
 	// returns the transforms of the joints
-	std::vector<glm::mat4> getJointTransforms() const;
+	const std::vector<glm::mat4> getJointTransforms() const;
 
 protected:
 	// the root of the joint hierachy
@@ -38,6 +38,6 @@ protected:
 
 private:
 	// create a flat array of transforms from the joints
-	void createFlatTransformArrayFromJoints(Joint headJoint, std::vector<glm::mat4> matrices) const;
+	void createFlatTransformArrayFromJoints(const Joint* headJoint, glm::mat4* matrices) const;
 };
 
