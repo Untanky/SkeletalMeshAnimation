@@ -10,6 +10,7 @@ AnimatedMesh AnimatedModelLoader::loadAnimatedMesh(const std::string& meshFilepa
 	SkeletonData skeletonData = entityData.getJointData();
 	Joint* headJoint = createJoints(skeletonData.headJoint);
 	Texture* texture = loadTexture(textureFilepath);
+	return AnimatedMesh(model, texture, headJoint, skeletonData.jointCount);
 }
 
 VAO* AnimatedModelLoader::createMesh(MeshData meshData)

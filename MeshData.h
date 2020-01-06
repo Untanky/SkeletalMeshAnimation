@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glm/glm.hpp"
+#include <vector>
 
 constexpr int DIMENSIONS = 3;
 
@@ -30,7 +31,7 @@ public:
 	inline std::vector<float> getNormals() const { return this->normals; }
 	inline std::vector<unsigned int> getJointIds() const { return this->jointIds; }
 	inline std::vector<float> getWeights() const { return this->weights; }
-	inline int getVertexCount() const { return vertices.size() / DIMENSIONS; }
+	inline int getVertexCount() const { return (int)vertices.size() / DIMENSIONS; }
 
 private:
 	const std::vector<unsigned int> indices; 

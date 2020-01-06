@@ -1,6 +1,6 @@
 #include "AnimatedMesh.h"
 
-AnimatedMesh::AnimatedMesh(const VAO* mesh, const Texture* texture, const Joint* rootJoint, const unsigned int numberOfJoints)
+AnimatedMesh::AnimatedMesh(VAO* mesh, Texture* texture, Joint* rootJoint, unsigned int numberOfJoints)
 	: model(mesh), texture(texture), rootJoint(rootJoint), numberOfJoints(numberOfJoints)
 { }
 

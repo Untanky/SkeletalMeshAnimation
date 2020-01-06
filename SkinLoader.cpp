@@ -1,5 +1,7 @@
 #include "SkinLoader.h"
 
+#include "rapidxml-1.13/rapidxml_helper.hpp"
+
 SkinLoader::SkinLoader(xml_node<>* node, unsigned int maxWeights)
 	: skinningData(node), maxWeights(maxWeights)
 { }
@@ -13,18 +15,6 @@ SkinningData SkinLoader::extractSkinningData()
 	std::vector<int> effectorJointsCounts = getEffectiveJointsCounts(weightsDataNode);
 	std::vector<VertexSkinData> vertexWeights = getSkinData(weightsDataNode, effectorJointsCounts, weights);
 	return SkinningData(jointsList, vertexWeights);
-}
-
-xml_node<>* getChildWithAttribute(const xml_node<>* parent, std::string childName, std::string attr, std::string value)
-{
-	xml_node<>* node = parent->first_node(childName.c_str);
-	while (xml_attribute<>* attribute = node->first_attribute(attr.c_str)) {
-		if (std::string(attribute->value()) != value)
-		{
-			node = node->next_sibling(childName.c_str);
-		}
-	}
-	return node;
 }
 
 std::vector<std::string> SkinLoader::loadJointList()

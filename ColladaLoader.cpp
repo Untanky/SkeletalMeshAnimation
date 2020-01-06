@@ -14,7 +14,7 @@ AnimatedModelData ColladaLoader::loadColladaModel(const string& colladaFilepath,
 	string xmlData;
 
 	xml_document<> doc;
-	doc.parse<0>(xmlData.c_str);
+	doc.parse<0>(xmlData.c_str());
 
 	SkinLoader* skinLoader = new SkinLoader(doc.first_node("library_controllers\0"), maxWeights);
 	SkinningData skinningData = skinLoader->extractSkinningData();

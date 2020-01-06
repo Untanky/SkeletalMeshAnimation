@@ -96,6 +96,9 @@
     <ClCompile Include="SkeletonLoader.cpp">
       <Filter>Source Files\Animation\Loading</Filter>
     </ClCompile>
+    <ClCompile Include="GeometryLoader.cpp">
+      <Filter>Source Files\Animation\Loading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMesh.h">
@@ -186,6 +189,9 @@
       <Filter>Header Files\Animation\Loading\Data</Filter>
     </ClInclude>
     <ClInclude Include="VertexSkinData.h">
+      <Filter>Header Files\Animation\Loading\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
       <Filter>Header Files\Animation\Loading\Data</Filter>
     </ClInclude>
   </ItemGroup>

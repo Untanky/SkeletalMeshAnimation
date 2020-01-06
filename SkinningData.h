@@ -1,6 +1,7 @@
 #pragma once
 
 #include "VertexSkinData.h"
+#include <string>
 
 using namespace std;
 
