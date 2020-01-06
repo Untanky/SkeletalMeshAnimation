@@ -157,6 +157,7 @@
     <ClCompile Include="AnimatedMesh.cpp" />
     <ClCompile Include="AnimatedModelLoader.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ColladaLoader.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="GLError.cpp" />
     <ClCompile Include="GLSL.cpp" />
@@ -172,20 +173,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMesh.h" />
+    <ClInclude Include="AnimatedModelData.h" />
     <ClInclude Include="AnimatedModelLoader.h" />
     <ClInclude Include="Application.hpp" />
+    <ClInclude Include="ColladaLoader.h" />
     <ClInclude Include="Context.hpp" />
     <ClInclude Include="Control.hpp" />
     <ClInclude Include="GLError.hpp" />
     <ClInclude Include="GLIncludes.hpp" />
     <ClInclude Include="GLSL.hpp" />
     <ClInclude Include="Joint.h" />
+    <ClInclude Include="JointData.h" />
+    <ClInclude Include="MeshData.h" />
     <ClInclude Include="Node.hpp" />
     <ClInclude Include="Robot.hpp" />
     <ClInclude Include="Scenegraph.hpp" />
     <ClInclude Include="RotationMode.hpp" />
     <ClInclude Include="Debug.hpp" />
     <ClInclude Include="Shaders.hpp" />
+    <ClInclude Include="SkeletonData.h" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="TriangleMesh.hpp" />
     <ClInclude Include="VAO.h" />

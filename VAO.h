@@ -27,6 +27,8 @@ public :
 
 	void createIntAttribute(int attribute, std::vector<int> data, int attrSize);
 
+	void createUIntAttribute(int attribute, std::vector<unsigned int> data, int attrSize);
+
 private:
 	VAO(const unsigned int id);
 

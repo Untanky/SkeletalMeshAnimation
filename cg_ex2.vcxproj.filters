@@ -31,6 +31,12 @@
     <Filter Include="Source Files\SkeletonCode">
       <UniqueIdentifier>{fec51701-742a-4f18-9fd3-67ff938bd19f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Animation\Loading">
+      <UniqueIdentifier>{4367dd27-69ab-48ec-bd6f-5399f36ae5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation\Loading">
+      <UniqueIdentifier>{c8fe2177-1f25-4a82-98c0-3870140585bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedMesh.cpp">
@@ -77,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\SkeletonCode</Filter>
+    </ClCompile>
+    <ClCompile Include="ColladaLoader.cpp">
+      <Filter>Source Files\Animation\Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +148,21 @@
     </ClInclude>
     <ClInclude Include="Texture.hpp">
       <Filter>Header Files\SkeletonCode</Filter>
+    </ClInclude>
+    <ClInclude Include="JointData.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshData.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="ColladaLoader.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModelData.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonData.h">
+      <Filter>Header Files\Animation\Loading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
