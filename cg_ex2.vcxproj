@@ -165,6 +165,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scenegraph.cpp" />
+    <ClCompile Include="SkinLoader.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TriangleMesh.cpp" />
     <ClCompile Include="VAO.cpp" />
