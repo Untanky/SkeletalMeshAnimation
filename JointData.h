@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Joint.h"
 #include "glm/glm.hpp"
 #include <vector>
 
@@ -14,5 +15,13 @@ public:
 
 	Joint* parent;
 
-	const std::vector<JointData> children;
+	std::vector<JointData> children;
+
+	JointData(unsigned int index, std::string& name, glm::mat4 bindTransfrom)
+		: index(index), name(name), bindTransform(bindTransform) { }
+
+	inline void addChild(JointData child)
+	{
+		children.push_back(child);
+	}
 };

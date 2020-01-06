@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Animation\Loading">
       <UniqueIdentifier>{c8fe2177-1f25-4a82-98c0-3870140585bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Animation\Loading\Data">
+      <UniqueIdentifier>{ab8fc61f-8b2b-4a2e-a8f2-c4d65a479778}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedMesh.cpp">
@@ -149,25 +152,10 @@
     <ClInclude Include="Texture.hpp">
       <Filter>Header Files\SkeletonCode</Filter>
     </ClInclude>
-    <ClInclude Include="JointData.h">
-      <Filter>Header Files\Animation\Loading</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshData.h">
-      <Filter>Header Files\Animation\Loading</Filter>
-    </ClInclude>
     <ClInclude Include="ColladaLoader.h">
       <Filter>Header Files\Animation\Loading</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatedModelData.h">
-      <Filter>Header Files\Animation\Loading</Filter>
-    </ClInclude>
-    <ClInclude Include="SkeletonData.h">
-      <Filter>Header Files\Animation\Loading</Filter>
-    </ClInclude>
     <ClInclude Include="SkinLoader.h">
-      <Filter>Header Files\Animation\Loading</Filter>
-    </ClInclude>
-    <ClInclude Include="SkinningData.h">
       <Filter>Header Files\Animation\Loading</Filter>
     </ClInclude>
     <ClInclude Include="SkeletonLoader.h">
@@ -175,6 +163,24 @@
     </ClInclude>
     <ClInclude Include="GeometryLoader.h">
       <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModelData.h">
+      <Filter>Header Files\Animation\Loading\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="JointData.h">
+      <Filter>Header Files\Animation\Loading\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshData.h">
+      <Filter>Header Files\Animation\Loading\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonData.h">
+      <Filter>Header Files\Animation\Loading\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinningData.h">
+      <Filter>Header Files\Animation\Loading\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexSkinData.h">
+      <Filter>Header Files\Animation\Loading\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

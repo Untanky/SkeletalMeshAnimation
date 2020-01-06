@@ -6,6 +6,13 @@
 class AnimatedModelData
 {
 public:
-	MeshData getMeshData() const;
-	SkeletonData getJointData() const;
+	AnimatedModelData(MeshData model, SkeletonData skeleton)
+		: mesh(model), joints(skeleton) { }
+
+	inline MeshData getMeshData() const { return this->mesh; }
+	inline SkeletonData getJointData() const { return this->joints; }
+
+private:
+	const MeshData mesh;
+	const SkeletonData joints;
 };
