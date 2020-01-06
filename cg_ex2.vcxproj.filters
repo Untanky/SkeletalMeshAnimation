@@ -164,6 +164,18 @@
     <ClInclude Include="SkeletonData.h">
       <Filter>Header Files\Animation\Loading</Filter>
     </ClInclude>
+    <ClInclude Include="SkinLoader.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinningData.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonLoader.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryLoader.h">
+      <Filter>Header Files\Animation\Loading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="cg_ex2.rc">

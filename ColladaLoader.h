@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AnimatedModelData.h"
+#include <string>
 
 class ColladaLoader
 {

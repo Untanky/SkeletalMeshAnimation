@@ -179,6 +179,7 @@
     <ClInclude Include="ColladaLoader.h" />
     <ClInclude Include="Context.hpp" />
     <ClInclude Include="Control.hpp" />
+    <ClInclude Include="GeometryLoader.h" />
     <ClInclude Include="GLError.hpp" />
     <ClInclude Include="GLIncludes.hpp" />
     <ClInclude Include="GLSL.hpp" />
@@ -192,6 +193,9 @@
     <ClInclude Include="Debug.hpp" />
     <ClInclude Include="Shaders.hpp" />
     <ClInclude Include="SkeletonData.h" />
+    <ClInclude Include="SkeletonLoader.h" />
+    <ClInclude Include="SkinLoader.h" />
+    <ClInclude Include="SkinningData.h" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="TriangleMesh.hpp" />
     <ClInclude Include="VAO.h" />
