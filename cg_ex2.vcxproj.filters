@@ -93,6 +93,9 @@
     <ClCompile Include="SkinLoader.cpp">
       <Filter>Source Files\Animation\Loading</Filter>
     </ClCompile>
+    <ClCompile Include="SkeletonLoader.cpp">
+      <Filter>Source Files\Animation\Loading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMesh.h">
