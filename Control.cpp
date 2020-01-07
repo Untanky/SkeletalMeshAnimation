@@ -28,6 +28,7 @@ using namespace std;
 #include "Context.hpp"
 #include "InputManager.hpp"
 #include "Robot.hpp"
+#include "TriangleMesh.hpp"
 
 // field of view
 unsigned int Control::fov = 40;

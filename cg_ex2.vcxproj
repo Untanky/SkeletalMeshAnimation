@@ -163,6 +163,7 @@
     <ClCompile Include="GLError.cpp" />
     <ClCompile Include="GLSL.cpp" />
     <ClCompile Include="Joint.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Robot.cpp" />
     <ClCompile Include="Scenegraph.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="GLSL.hpp" />
     <ClInclude Include="Joint.h" />
     <ClInclude Include="JointData.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshData.h" />
     <ClInclude Include="Node.hpp" />
     <ClInclude Include="Robot.hpp" />

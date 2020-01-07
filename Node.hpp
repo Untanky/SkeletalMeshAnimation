@@ -15,7 +15,7 @@
 using namespace glm;
 
 #include "RotationMode.hpp"
-#include "TriangleMesh.hpp"
+#include "Mesh.h"
 #include "shaders/Material.h"
 
 // NOTE: each node in the scenegraph can have multiple 
@@ -60,7 +60,7 @@ public:
 	// jointx, jointy, jointz: x,y,z offset of  rotation axis from center of body part
 	// i.e. for rotation about a "shoulder" as opposed to the center of mass of a glutsolidcube
 	// x,y,z: rotation (in degrees) of node relative to parent node rotation
-	Node(TriangleMesh* mesh,
+	Node(Mesh* mesh,
 		Material material,
 		float x, float y, float z,
 		float length, float height, float width,
@@ -148,5 +148,5 @@ protected:
 	Node* parent;
 	Node* child;
 
-	TriangleMesh* mesh;
+	Mesh* mesh;
 };

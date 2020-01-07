@@ -1,15 +1,18 @@
 #pragma once
 
+#include "Mesh.h"
 #include "Joint.h"
 #include "VAO.h"
 #include "Texture.hpp"
 #include <vector>
 
-class AnimatedMesh
+class AnimatedMesh : Mesh
 {
 public:
 	AnimatedMesh(VAO* mesh, Texture* texture, Joint* rootJoint, unsigned int numberOfJoints);
 	~AnimatedMesh();
+
+	virtual void draw() override;
 
 	// returns the model 
 	VAO* getModel() const { return this->model; };

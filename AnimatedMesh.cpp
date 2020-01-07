@@ -10,6 +10,20 @@ AnimatedMesh::~AnimatedMesh()
 	delete texture;
 }
 
+void AnimatedMesh::draw()
+{
+	std::vector<unsigned int> bindIndices;
+	bindIndices.push_back(0);
+	bindIndices.push_back(1);
+	bindIndices.push_back(2);
+	bindIndices.push_back(3);
+	bindIndices.push_back(4);
+
+	this->model->bind(bindIndices);
+	glDrawElements(GL_TRIANGLES, model->getIndexCount(), GL_UNSIGNED_INT, 0);
+	this->model->unbind(bindIndices);
+}
+
 const std::vector<glm::mat4> AnimatedMesh::getJointTransforms() const
 {
 	glm::mat4* matrices = (glm::mat4*)malloc(this->numberOfJoints * sizeof(glm::mat4));

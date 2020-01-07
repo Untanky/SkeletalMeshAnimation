@@ -15,6 +15,8 @@
 
 #include "GLIncludes.hpp"
 
+#include "Mesh.h"
+
 // OpenGL mathematics library
 // http://glm.g-truc.net
 #include "glm/glm.hpp"
@@ -22,7 +24,7 @@
 /*
  * Class for a simple triangle mesh represented as an indexed face set
  */
-class TriangleMesh{
+class TriangleMesh : Mesh {
 
 public:
 
@@ -61,7 +63,7 @@ public:
   void computeNormals(void);
 
   // draw the model
-  virtual void draw(void);
+  virtual void draw(void) override;
   
   // vertex attribute bindings
   // see https://www.opengl.org/sdk/docs/tutorials/ClockworkCoders/attributes.php

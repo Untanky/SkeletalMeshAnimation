@@ -20,6 +20,7 @@
 #define DEBUG // (enable/disable logging)
 #include "Log.hpp"
 #include "SceneGraph.hpp"
+#include "TriangleMesh.hpp"
 
    // use this with care
    // might cause name collisions

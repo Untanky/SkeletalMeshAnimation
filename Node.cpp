@@ -33,7 +33,7 @@ using namespace std;
 // i.e. for rotation about a "shoulder" as opposed to the center of mass of a cube
 // x,y,z: rotation (in degrees) of node relative to parent node rotation
 // radius: radius of virtual trackball
-Node::Node(TriangleMesh* mesh,
+Node::Node(Mesh* mesh,
 	Material material,
 	float x, float y, float z,
 	float length, float height, float width,

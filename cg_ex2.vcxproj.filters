@@ -40,6 +40,12 @@
     <Filter Include="Header Files\Animation\Loading\Data">
       <UniqueIdentifier>{ab8fc61f-8b2b-4a2e-a8f2-c4d65a479778}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{46a1b832-eff2-4d9a-b598-e852bdfaa502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
+      <UniqueIdentifier>{d1114950-809e-4f14-b5f7-f349d0936502}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedMesh.cpp">
@@ -98,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="GeometryLoader.cpp">
       <Filter>Source Files\Animation\Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Header Files\Animation\Loading\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

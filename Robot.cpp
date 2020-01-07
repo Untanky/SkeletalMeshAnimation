@@ -36,13 +36,13 @@ Node* Robot::buildRobot() {
 	// torso attributes and initial position.
 	// for parameters of constructor and their meanings,
 	// see file node.h
-	Node* torso = new Node(mesh, material,
+	Node* torso = new Node((Mesh*)mesh, material,
 		0, 50, 0,
 		200, 300, 100,
 		0, 0, 0,
 		0, 0, 0);
 
-	Node* leftArm = new Node(mesh, material,
+	Node* leftArm = new Node((Mesh*)mesh, material,
 		150, 50, 0,
 		40, 200, 40,
 		0, 100, 0,
@@ -50,7 +50,7 @@ Node* Robot::buildRobot() {
 
 	leftArm->setParent(torso);
 
-	Node* leftForeArm = new Node(mesh, material,
+	Node* leftForeArm = new Node((Mesh*)mesh, material,
 		0, -250, 0,
 		40, 200, 40,
 		0, 150, 0,
@@ -58,7 +58,7 @@ Node* Robot::buildRobot() {
 
 	leftForeArm->setParent(leftArm);
 
-	Node* rightArm = new Node(mesh, material,
+	Node* rightArm = new Node((Mesh*)mesh, material,
 		-150, 50, 0,
 		40, 200, 40,
 		0, 100, 0,
@@ -66,7 +66,7 @@ Node* Robot::buildRobot() {
 
 	rightArm->setParent(torso);
 
-	Node* rightForeArm = new Node(mesh, material,
+	Node* rightForeArm = new Node((Mesh*)mesh, material,
 		0, -250, 0,
 		40, 200, 40,
 		0, 150, 0,
@@ -74,7 +74,7 @@ Node* Robot::buildRobot() {
 
 	rightForeArm->setParent(rightArm);
 
-	Node* leftLeg = new Node(mesh, material,
+	Node* leftLeg = new Node((Mesh*)mesh, material,
 		70, -375, 0,
 		80, 300, 80,
 		0, 150, 0,
@@ -82,7 +82,7 @@ Node* Robot::buildRobot() {
 
 	leftLeg->setParent(torso);
 
-	Node* rightLeg = new Node(mesh, material,
+	Node* rightLeg = new Node((Mesh*)mesh, material,
 		-70, -375, 0,
 		80, 300, 80,
 		0, 150, 0,
@@ -90,7 +90,7 @@ Node* Robot::buildRobot() {
 
 	rightLeg->setParent(torso);
 
-	Node* head = new Node(mesh, material,
+	Node* head = new Node((Mesh*)mesh, material,
 		0, 250, 0,
 		100, 100, 100,
 		0, 100, 0,
