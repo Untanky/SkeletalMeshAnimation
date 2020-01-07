@@ -10,6 +10,8 @@
 
 #include "Robot.hpp"
 #include "TriangleMesh.hpp"
+#include "AnimatedMesh.h"
+#include "AnimatedModelLoader.h"
 
    // nodes of the scenegraph
 
@@ -23,6 +25,8 @@
 
    // build the robot scenegraph
 Node* Robot::buildRobot() {
+
+	AnimatedMesh* animatedMesh = &AnimatedModelLoader::loadAnimatedMesh("meshes/model.dae", "");
 
 	// mesh
 	TriangleMesh* mesh = new TriangleMesh("meshes/cube.obj");

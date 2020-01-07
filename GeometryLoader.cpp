@@ -5,7 +5,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 GeometryLoader::GeometryLoader(xml_node<>* node, vector<VertexSkinData> vertexWeights)
-	: vertexWeights(vertexWeights), node(node)
+	: vertexWeights(vertexWeights), node(node->first_node("geometry\0")->first_node("mesh\0"))
 { }
 
 MeshData GeometryLoader::extractModelData()
@@ -29,7 +29,7 @@ void GeometryLoader::readRawData()
 void GeometryLoader::readPositions()
 {
 	string positionId = node->first_node("vertices\0")->first_node("input\0")->first_attribute("source\0")->value();
-	positionId.substr(1);
+	positionId = positionId.substr(1);
 	xml_node<>* positionData = getChildWithAttribute(node, "source\0", "id\0", positionId)->first_node("float_array\0");
 	int count = stoi(positionData->first_attribute("count\0")->value());
 	string posData = positionData->value();
@@ -43,6 +43,7 @@ void GeometryLoader::readPositions()
 		posDataList.push_back(token);
 		posData.erase(0, pos + delimiter.length());
 	}
+	posDataList.push_back(posData);
 
 	for (int i = 0; i < count/3; i++)
 	{
@@ -58,7 +59,7 @@ void GeometryLoader::readPositions()
 void GeometryLoader::readNormals()
 {
 	string normalId = getChildWithAttribute(node->first_node("polylist\0"), "input\0", "semantic\0", "NORMAL")->first_attribute("source\0")->value();
-	normalId.substr(1);
+	normalId = normalId.substr(1);
 	xml_node<>* normalData = getChildWithAttribute(node, "source\0", "id\0", normalId)->first_node("float_array\0");
 	int count = stoi(normalData->first_attribute("count\0")->value());
 	string normData = normalData->value();
@@ -72,6 +73,7 @@ void GeometryLoader::readNormals()
 		normDataList.push_back(token);
 		normData.erase(0, pos + delimiter.length());
 	}
+	normDataList.push_back(normData);
 
 	for (int i = 0; i < count / 3; i++)
 	{
@@ -87,7 +89,7 @@ void GeometryLoader::readNormals()
 void GeometryLoader::readTexCoords()
 {
 	string texCoordId = getChildWithAttribute(node->first_node("polylist\0"), "input\0", "semantic\0", "TEXCOORD")->first_attribute("source\0")->value();
-	texCoordId.substr(1);
+	texCoordId = texCoordId.substr(1);
 	xml_node<>* texCoordsData = getChildWithAttribute(node, "source\0", "id\0", texCoordId)->first_node("float_array\0");
 	int count = stoi(texCoordsData->first_attribute("count\0")->value());
 	string texCoordData = texCoordsData->value();
@@ -101,11 +103,12 @@ void GeometryLoader::readTexCoords()
 		texCoordDataList.push_back(token);
 		texCoordData.erase(0, pos + delimiter.length());
 	}
+	texCoordDataList.push_back(texCoordData);
 
-	for (int i = 0; i < count / 3; i++)
+	for (int i = 0; i < count / 2; i++)
 	{
-		float s = stof(texCoordDataList[i * 3]);
-		float t = stof(texCoordDataList[i * 3 + 1]);
+		float s = stof(texCoordDataList[i * 2]);
+		float t = stof(texCoordDataList[i * 2 + 1]);
 		glm::vec2 texCoord = glm::vec2(s, t);
 		texCoords.push_back(texCoord);
 	}
@@ -114,8 +117,8 @@ void GeometryLoader::readTexCoords()
 void GeometryLoader::assembleVertices()
 {
 	xml_node<>* poly = node->first_node("polylist\0");
-	int typeCount = stoi(poly->first_attribute("count\0")->value());
-	string indexRawData = poly->value();
+	int typeCount = 4;/** TODO: Read how many index children there are */
+	string indexRawData = poly->first_node("p\0")->value();
 	vector<string> indexData;
 	std::string delimiter = " ";
 
@@ -126,25 +129,30 @@ void GeometryLoader::assembleVertices()
 		indexData.push_back(token);
 		indexRawData.erase(0, pos + delimiter.length());
 	}
+	indexData.push_back(indexRawData);
 
 	for (int i = 0; i < indexData.size() / typeCount; i++)
 	{
 		int positionIndex = stoi(indexData[i * typeCount]);
 		int normalIndex = stoi(indexData[i * typeCount + 1]);
 		int texCoordIndex = stoi(indexData[i * typeCount + 2]);
+		if (positionIndex == 0)
+		{
+			normalIndex = normalIndex;
+		}
 		processVertex(positionIndex, normalIndex, texCoordIndex);
 	}
 }
 
 Vertex GeometryLoader::processVertex(int postionIndex, int normalIndex, int texCoordIndex)
 {
-	Vertex currentVertex = vertices[postionIndex];
-	if (!currentVertex.isSet())
+	Vertex* currentVertex = &vertices[postionIndex];
+	if (!currentVertex->isSet())
 	{
-		currentVertex.setTextureIndex(texCoordIndex);
-		currentVertex.setNormalIndex(texCoordIndex);
+		currentVertex->setTextureIndex(texCoordIndex);
+		currentVertex->setNormalIndex(normalIndex);
 		indices.push_back(postionIndex);
-		return currentVertex;
+		return *currentVertex;
 	}
 	else
 	{
@@ -194,29 +202,29 @@ float GeometryLoader::convertDataToArray()
 	return furthestPoint;
 }
 
-Vertex GeometryLoader::dealWithAlreadyProcessedVertex(Vertex previousVertex, int newTextureIndex, int newNormalIndex)
+Vertex GeometryLoader::dealWithAlreadyProcessedVertex(Vertex* previousVertex, int newTextureIndex, int newNormalIndex)
 {
-	if (previousVertex.hasSameTextureAndNormal(newTextureIndex, newNormalIndex))
+	if (previousVertex->hasSameTextureAndNormal(newTextureIndex, newNormalIndex))
 	{
-		indices.push_back(previousVertex.getIndex());
-		return previousVertex;
+		indices.push_back(previousVertex->getIndex());
+		return *previousVertex;
 	}
 	else
 	{
-		Vertex* anotherVertex = previousVertex.getDuplicateVertex();
-		if (anotherVertex)
+		Vertex* anotherVertex = previousVertex->getDuplicateVertex();
+		if (anotherVertex != nullptr)
 		{
-			return dealWithAlreadyProcessedVertex(*anotherVertex, newTextureIndex, newNormalIndex);
+			return dealWithAlreadyProcessedVertex(anotherVertex, newTextureIndex, newNormalIndex);
 		}
 		else
 		{
-			Vertex duplicateVertex = Vertex(vertices.size(), previousVertex.getPosition(), previousVertex.getWeightsData());
-			duplicateVertex.setTextureIndex(newTextureIndex);
-			duplicateVertex.setNormalIndex(newNormalIndex);
-			previousVertex.setDuplicateVertex(&duplicateVertex);
-			vertices.push_back(duplicateVertex);
-			indices.push_back(duplicateVertex.getIndex());
-			return duplicateVertex;
+			Vertex* duplicateVertex = new Vertex(vertices.size(), previousVertex->getPosition(), previousVertex->getWeightsData());
+			duplicateVertex->setTextureIndex(newTextureIndex);
+			duplicateVertex->setNormalIndex(newNormalIndex);
+			previousVertex->setDuplicateVertex(duplicateVertex);
+			vertices.push_back(*duplicateVertex);
+			indices.push_back(duplicateVertex->getIndex());
+			return *duplicateVertex;
 		}
 	}
 }

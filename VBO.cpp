@@ -4,7 +4,7 @@
 
 VBO* VBO::create(const int type) 
 {
-	unsigned int* id = 0;
+	unsigned int id[1];
 	glGenBuffers(1, id);
 	return new VBO(id[0], type);
 }
@@ -15,7 +15,9 @@ VBO::VBO(const unsigned int id, const int type)
 
 VBO::~VBO()
 {
-	glDeleteBuffers(1, (const unsigned int*)id);
+	unsigned int uid[1];
+	uid[0] = id;
+	glDeleteBuffers(1, uid);
 }
 
 void VBO::bind()

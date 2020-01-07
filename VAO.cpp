@@ -4,18 +4,20 @@
 
 VAO* VAO::create()
 {
-	unsigned int* id = 0;
+	unsigned int id[1];
 	glGenVertexArrays(1, id);
 	return new VAO(id[0]);
 }
 
-VAO::VAO(const unsigned int id) 
+VAO::VAO(unsigned int id) 
 	: id(id) 
 { }
 
 VAO::~VAO()
 {
-	glDeleteVertexArrays(1, (const unsigned int*)id);
+	unsigned int uid[1];
+	uid[0] = id;
+	glDeleteVertexArrays(1, uid);
 	for each (VBO* vbo in dataVBOs)
 	{
 		delete vbo;

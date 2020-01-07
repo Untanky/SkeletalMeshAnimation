@@ -6,10 +6,11 @@ inline xml_node<>* getChildWithAttribute(const xml_node<>* parent, std::string c
 {
 	xml_node<>* node = parent->first_node(childName.c_str());
 	while (xml_attribute<>* attribute = node->first_attribute(attr.c_str())) {
-		if (std::string(attribute->value()) != value)
+		if (std::string(attribute->value()) == value)
 		{
-			node = node->next_sibling(childName.c_str());
+			return node;
 		}
+		node = node->next_sibling(childName.c_str());
 	}
 	return node;
 }

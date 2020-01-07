@@ -3,8 +3,10 @@
 #include "rapidxml-1.13/rapidxml_helper.hpp"
 
 SkinLoader::SkinLoader(xml_node<>* node, unsigned int maxWeights)
-	: skinningData(node), maxWeights(maxWeights)
-{ }
+	: skinningData(node->first_node("controller\0")->first_node("skin\0")), maxWeights(maxWeights)
+{ 
+
+}
 
 SkinningData SkinLoader::extractSkinningData()
 {
@@ -22,7 +24,7 @@ std::vector<std::string> SkinLoader::loadJointList()
 	xml_node<>* weightNode = skinningData->first_node("vertex_weights\0");
 
 	std::string jointDataId = getChildWithAttribute(weightNode, "input\0", "semantic\0", "JOINT\0")->first_attribute("source\0")->value();
-	jointDataId.substr(1);
+	jointDataId = jointDataId.substr(1);
 
 	xml_node<>* jointsNode = getChildWithAttribute(skinningData, "source\0", "id\0", jointDataId + "\0")->first_node("Name_array\0");
 	string names = jointsNode->value();
@@ -46,7 +48,7 @@ std::vector<float> SkinLoader::loadWeights()
 	xml_node<>* weightNode = skinningData->first_node("vertex_weights\0");
 
 	std::string weightsDataId = getChildWithAttribute(weightNode, "input\0", "semantic\0", "WEIGHT\0")->first_attribute("source\0")->value();
-	weightsDataId.substr(1);
+	weightsDataId = weightsDataId.substr(1);
 
 	xml_node<>* weightsNode = getChildWithAttribute(skinningData, "source\0", "id\0", weightsDataId + "\0")->first_node("float_array\0");
 	string rawData = weightsNode->value();
@@ -61,13 +63,14 @@ std::vector<float> SkinLoader::loadWeights()
 		joints.push_back(std::stof(token));
 		rawData.erase(0, pos + delimiter.length());
 	}
+	joints.push_back(std::stof(rawData));
 
 	return joints;
 }
 
 std::vector<int> SkinLoader::getEffectiveJointsCounts(xml_node<>* weightsDataNode)
 {
-	xml_node<>* weightsNode = skinningData->first_node("vcount\0");
+	xml_node<>* weightsNode = weightsDataNode->first_node("vcount\0");
 	string rawData = weightsNode->value();
 
 	vector<int> counts;
@@ -86,7 +89,7 @@ std::vector<int> SkinLoader::getEffectiveJointsCounts(xml_node<>* weightsDataNod
 
 std::vector<VertexSkinData> SkinLoader::getSkinData(xml_node<>* weightsDataNode, std::vector<int> counts, std::vector<float> weights)
 {
-	xml_node<>* weightsNode = skinningData->first_node("v\0");
+	xml_node<>* weightsNode = weightsDataNode->first_node("v\0");
 	string rawData = weightsNode->value();
 	vector<string> rawDataList;
 	std::string delimiter = " ";
@@ -98,14 +101,20 @@ std::vector<VertexSkinData> SkinLoader::getSkinData(xml_node<>* weightsDataNode,
 		rawDataList.push_back(token);
 		rawData.erase(0, pos + delimiter.length());
 	}
+	rawDataList.push_back(rawData);
 
-	int pointer;
+	int pointer = 0;
 	vector<VertexSkinData> skinningData;
-	for each (int count in counts)
+	for (int j = 0; j < counts.size(); j++)
 	{
+		int count = counts[j];
 		VertexSkinData skinData = VertexSkinData();
 		for (int i = 0; i < count; i++)
 		{
+			if (pointer >= 2780) {
+				pointer = pointer;
+				j = j;
+			}
 			int jointId = std::stoi(rawDataList[pointer++]);
 			int weightId = std::stoi(rawDataList[pointer++]);
 			skinData.addJointEffect(jointId, weights[weightId]);

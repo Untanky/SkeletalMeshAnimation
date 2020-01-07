@@ -8,7 +8,7 @@ AnimatedMesh AnimatedModelLoader::loadAnimatedMesh(const std::string& meshFilepa
 	AnimatedModelData entityData = ColladaLoader::loadColladaModel(meshFilepath, 50);
 	VAO* model = createMesh(entityData.getMeshData());
 	SkeletonData skeletonData = entityData.getJointData();
-	Joint* headJoint = createJoints(skeletonData.headJoint);
+	Joint* headJoint = createJoints(skeletonData.headJoint, true);
 	Texture* texture = loadTexture(textureFilepath);
 	return AnimatedMesh(model, texture, headJoint, skeletonData.jointCount);
 }
@@ -27,15 +27,16 @@ VAO* AnimatedModelLoader::createMesh(MeshData meshData)
 	return vao;
 }
 
-Joint* AnimatedModelLoader::createJoints(JointData jointData)
+Joint* AnimatedModelLoader::createJoints(JointData* jointData, bool isRoot)
 {
-	Joint* joint = new Joint(jointData.index, jointData.name, jointData.bindTransform);
-	joint->setParent(jointData.parent);
+	Joint* joint = new Joint(jointData->index, jointData->name, jointData->bindTransform);
+	if(!isRoot)
+		joint->setParent(jointData->parent);
 
-	for each (JointData jd in jointData.children)
+	for each (JointData* jd in jointData->children)
 	{
-		jd.parent = joint;
-		createJoints(jd);
+		jd->parent = joint;
+		createJoints(jd, false);
 	}
 	return joint;
 }

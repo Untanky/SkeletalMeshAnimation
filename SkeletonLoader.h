@@ -21,9 +21,9 @@ public:
 	SkeletonData extractSkeletonData();
 
 private:
-	JointData loadJointData(xml_node<>* jointNode, bool isRoot);
+	JointData* loadJointData(xml_node<>* jointNode, bool isRoot);
 
-	JointData extractMainData(xml_node<>* jointNode, bool isRoot);
+	JointData* extractMainData(xml_node<>* jointNode, bool isRoot);
 
 	float* convertData(vector<string>);
 

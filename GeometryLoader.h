@@ -39,7 +39,7 @@ private:
 
 	float convertDataToArray();
 
-	Vertex dealWithAlreadyProcessedVertex(Vertex perviousVertex, int newTextureIndex, int newNormalIndex);
+	Vertex dealWithAlreadyProcessedVertex(Vertex* perviousVertex, int newTextureIndex, int newNormalIndex);
 
 	void initArrays();
 

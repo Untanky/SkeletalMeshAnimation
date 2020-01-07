@@ -28,10 +28,10 @@ protected:
 
 	const std::string& name;
 
-	Joint* previous;
-	Joint* next;
-	Joint* parent;
-	Joint* child;
+	Joint* previous = 0;
+	Joint* next = 0;
+	Joint* parent = 0;
+	Joint* child = 0;
 
 	glm::mat4 animatedTransform;
 

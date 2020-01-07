@@ -19,13 +19,16 @@ AnimatedModelData ColladaLoader::loadColladaModel(const string& colladaFilepath,
 	xml_document<> doc;
 	doc.parse<0>(xmlFile.data());
 
-	SkinLoader* skinLoader = new SkinLoader(doc.first_node("library_controllers\0"), maxWeights);
+	xml_node<>* root = doc.first_node("COLLADA\0");
+
+	xml_node<>* node = root->first_node("library_controllers\0");
+	SkinLoader* skinLoader = new SkinLoader(node, maxWeights);
 	SkinningData skinningData = skinLoader->extractSkinningData();
 
-	SkeletonLoader* jointsLoader = new SkeletonLoader(doc.first_node("library_visual_scenes\0"), skinningData.jointOrder);
+	SkeletonLoader* jointsLoader = new SkeletonLoader(root->first_node("library_visual_scenes\0"), skinningData.jointOrder);
 	SkeletonData jointsData = jointsLoader->extractSkeletonData();
 
-	GeometryLoader* modelLoader = new GeometryLoader(doc.first_node("library_geometries\0"), skinningData.verticesSkinData);
+	GeometryLoader* modelLoader = new GeometryLoader(root->first_node("library_geometries\0"), skinningData.verticesSkinData);
 	MeshData meshData = modelLoader->extractModelData();
 
 	return AnimatedModelData(meshData, jointsData);

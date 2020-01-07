@@ -14,6 +14,6 @@ private:
 	
 	static VAO* createMesh(const MeshData meshData);
 
-	static Joint* createJoints(const JointData jointData);
+	static Joint* createJoints(JointData* jointData, bool isRoot);
 };
 

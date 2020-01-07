@@ -6,9 +6,9 @@ class SkeletonData
 {
 public:
 	const int jointCount;
-	const JointData headJoint;
+	JointData* headJoint;
 
-	SkeletonData(const int jointCount, const JointData headJoint)
+	SkeletonData(const int jointCount, JointData* headJoint)
 		: jointCount(jointCount), headJoint(headJoint)
 	{ }
 };
