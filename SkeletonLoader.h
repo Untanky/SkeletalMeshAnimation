@@ -11,6 +11,8 @@ using namespace rapidxml;
 
 constexpr int BUFFER_SIZE = 16;
 
+constexpr float PI = 3.1415926f;
+
 class SkeletonLoader
 {
 public:
@@ -31,5 +33,5 @@ private:
 
 	int jointCount = 0;
 
-	const glm::mat4 CORRECTION = glm::rotate(glm::mat4(1), glm::pi<float>() / 360.f * 90.f, glm::vec3(1.f, 0.f, 0.f));
+	const glm::mat4 CORRECTION = glm::rotate(glm::mat4(1), PI / 360.f * 90.f, glm::vec3(1.f, 0.f, 0.f));
 };

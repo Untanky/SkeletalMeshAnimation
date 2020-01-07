@@ -1,7 +1,5 @@
 #pragma once
 
-#include "AnimatedMesh.h"
-
 #include <string>
 
 #include "glm/glm.hpp"

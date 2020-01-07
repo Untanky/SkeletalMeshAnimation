@@ -2,7 +2,7 @@
 
 using namespace rapidxml;
 
-xml_node<>* getChildWithAttribute(const xml_node<>* parent, std::string childName, std::string attr, std::string value)
+inline xml_node<>* getChildWithAttribute(const xml_node<>* parent, std::string childName, std::string attr, std::string value)
 {
 	xml_node<>* node = parent->first_node(childName.c_str());
 	while (xml_attribute<>* attribute = node->first_attribute(attr.c_str())) {

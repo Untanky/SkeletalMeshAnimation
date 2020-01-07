@@ -1,6 +1,9 @@
 #include "ColladaLoader.h"
 
 #include "rapidxml-1.13/rapidxml.hpp"
+#include "rapidxml-1.13/rapidxml_utils.hpp"
+
+#include <fstream>
 
 #include "SkinLoader.h";
 #include "SkeletonLoader.h"
@@ -11,10 +14,10 @@ using namespace rapidxml;
 
 AnimatedModelData ColladaLoader::loadColladaModel(const string& colladaFilepath, unsigned int maxWeights)
 {
-	string xmlData;
+	file<> xmlFile(colladaFilepath.c_str());
 
 	xml_document<> doc;
-	doc.parse<0>(xmlData.c_str());
+	doc.parse<0>(xmlFile.data());
 
 	SkinLoader* skinLoader = new SkinLoader(doc.first_node("library_controllers\0"), maxWeights);
 	SkinningData skinningData = skinLoader->extractSkinningData();

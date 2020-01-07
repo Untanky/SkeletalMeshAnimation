@@ -17,7 +17,7 @@ public:
 
 	void addTangent(glm::vec3 tangent) { this->tangents.push_back(tangent); }
 
-	void avereageTangent()
+	void averageTangents()
 	{
 		if (tangents.empty())
 			return;

@@ -31,7 +31,7 @@ void GeometryLoader::readPositions()
 	string positionId = node->first_node("vertices\0")->first_node("input\0")->first_attribute("source\0")->value();
 	positionId.substr(1);
 	xml_node<>* positionData = getChildWithAttribute(node, "source\0", "id\0", positionId)->first_node("float_array\0");
-	int count = stoi(positionData->first_attribute("count\0")->value);
+	int count = stoi(positionData->first_attribute("count\0")->value());
 	string posData = positionData->value();
 	vector<string> posDataList;
 	std::string delimiter = " ";
@@ -60,7 +60,7 @@ void GeometryLoader::readNormals()
 	string normalId = getChildWithAttribute(node->first_node("polylist\0"), "input\0", "semantic\0", "NORMAL")->first_attribute("source\0")->value();
 	normalId.substr(1);
 	xml_node<>* normalData = getChildWithAttribute(node, "source\0", "id\0", normalId)->first_node("float_array\0");
-	int count = stoi(normalData->first_attribute("count\0")->value);
+	int count = stoi(normalData->first_attribute("count\0")->value());
 	string normData = normalData->value();
 	vector<string> normDataList;
 	std::string delimiter = " ";
@@ -89,7 +89,7 @@ void GeometryLoader::readTexCoords()
 	string texCoordId = getChildWithAttribute(node->first_node("polylist\0"), "input\0", "semantic\0", "TEXCOORD")->first_attribute("source\0")->value();
 	texCoordId.substr(1);
 	xml_node<>* texCoordsData = getChildWithAttribute(node, "source\0", "id\0", texCoordId)->first_node("float_array\0");
-	int count = stoi(texCoordsData->first_attribute("count\0")->value);
+	int count = stoi(texCoordsData->first_attribute("count\0")->value());
 	string texCoordData = texCoordsData->value();
 	vector<string> texCoordDataList;
 	std::string delimiter = " ";
@@ -114,7 +114,7 @@ void GeometryLoader::readTexCoords()
 void GeometryLoader::assembleVertices()
 {
 	xml_node<>* poly = node->first_node("polylist\0");
-	int typeCount = stoi(poly->first_attribute("count\0")->value);
+	int typeCount = stoi(poly->first_attribute("count\0")->value());
 	string indexRawData = poly->value();
 	vector<string> indexData;
 	std::string delimiter = " ";
@@ -182,7 +182,7 @@ float GeometryLoader::convertDataToArray()
 		normalsArray.push_back(normal.x);
 		normalsArray.push_back(normal.y);
 		normalsArray.push_back(normal.z);
-		VertexSkinData weights = currentVertex.getWeightData();
+		VertexSkinData weights = currentVertex.getWeightsData();
 		jointIdsArray.push_back(weights.jointIds[0]);
 		jointIdsArray.push_back(weights.jointIds[1]);
 		jointIdsArray.push_back(weights.jointIds[2]);
@@ -196,24 +196,24 @@ float GeometryLoader::convertDataToArray()
 
 Vertex GeometryLoader::dealWithAlreadyProcessedVertex(Vertex previousVertex, int newTextureIndex, int newNormalIndex)
 {
-	if (previousVertex.hasSameTextureANdNormal(newTextureIndex, newNormalIndex))
+	if (previousVertex.hasSameTextureAndNormal(newTextureIndex, newNormalIndex))
 	{
 		indices.push_back(previousVertex.getIndex());
 		return previousVertex;
 	}
 	else
 	{
-		Vertex* anotherVertex = previousVertex.duplicateVertex();
+		Vertex* anotherVertex = previousVertex.getDuplicateVertex();
 		if (anotherVertex)
 		{
 			return dealWithAlreadyProcessedVertex(*anotherVertex, newTextureIndex, newNormalIndex);
 		}
 		else
 		{
-			Vertex duplicateVertex = Vertex(vertices.size(), previousVertex.getPosition(), previousVertex.getWeightData);
+			Vertex duplicateVertex = Vertex(vertices.size(), previousVertex.getPosition(), previousVertex.getWeightsData());
 			duplicateVertex.setTextureIndex(newTextureIndex);
 			duplicateVertex.setNormalIndex(newNormalIndex);
-			previousVertex.setDuplicateVertex(duplicateVertex);
+			previousVertex.setDuplicateVertex(&duplicateVertex);
 			vertices.push_back(duplicateVertex);
 			indices.push_back(duplicateVertex.getIndex());
 			return duplicateVertex;

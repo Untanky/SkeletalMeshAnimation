@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rapidxml-1.13/rapidxml.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include <vector>
 #include "MeshData.h"
 #include "VertexSkinData.h"
@@ -55,5 +56,7 @@ private:
 	vector<unsigned int> jointIdsArray;
 	vector<float> weightsArray;
 
-	const glm::mat4 CORRECTION = glm::rotate(glm::mat4(1), glm::pi<float>() / 360.f * -90.f, glm::vec3(1.f, 0.f, 0.f));
+	const float PI = 3.1415926f;
+
+	const glm::mat4 CORRECTION = glm::rotate(glm::mat4(1), PI / 360.f * -90.f, glm::vec3(1.f, 0.f, 0.f));
 };

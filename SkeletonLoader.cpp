@@ -30,7 +30,7 @@ JointData SkeletonLoader::loadJointData(xml_node<>* jointNode, bool isRoot)
 JointData SkeletonLoader::extractMainData(xml_node<>* jointNode, bool isRoot)
 {
 	string nameId = jointNode->first_attribute("id\0")->value();
-	int index = find(nameId.begin(), nameId.end(), nameId) - nameId.begin();
+	int index = find(boneOrder.begin(), boneOrder.end(), nameId) - boneOrder.begin();
 	string rawData;
 	vector<string> matrixData;
 	string delimiter = " ";

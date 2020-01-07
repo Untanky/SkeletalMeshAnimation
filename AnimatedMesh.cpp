@@ -24,7 +24,7 @@ const std::vector<glm::mat4> AnimatedMesh::getJointTransforms() const
 	return transforms;
 }
 
-void AnimatedMesh::createFlatTransformArrayFromJoints(const Joint* headJoint, glm::mat4* matrices) const
+void AnimatedMesh::createFlatTransformArrayFromJoints(Joint* headJoint, glm::mat4* matrices) const
 {
 	matrices[headJoint->getIndex()] = headJoint->getAnimatedTransform();
 
