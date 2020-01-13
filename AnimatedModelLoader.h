@@ -7,7 +7,7 @@
 class AnimatedModelLoader
 {
 public:
-	static AnimatedMesh loadAnimatedMesh(const std::string& modelFilepath, const std::string& textureFilepath);
+	static AnimatedMesh* loadAnimatedMesh(const std::string& modelFilepath, const std::string& textureFilepath);
 
 private:
 	static Texture* loadTexture(const std::string& textureFilepath);

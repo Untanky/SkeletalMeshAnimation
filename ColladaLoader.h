@@ -6,6 +6,6 @@
 class ColladaLoader
 {
 public:
-	static AnimatedModelData loadColladaModel(const std::string& meshFilepath, const unsigned int maxWeights);
+	static AnimatedModelData* loadColladaModel(const std::string& meshFilepath, const unsigned int maxWeights);
 };
 

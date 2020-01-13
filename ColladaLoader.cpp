@@ -12,7 +12,7 @@
 using namespace std;
 using namespace rapidxml;
 
-AnimatedModelData ColladaLoader::loadColladaModel(const string& colladaFilepath, unsigned int maxWeights)
+AnimatedModelData* ColladaLoader::loadColladaModel(const string& colladaFilepath, unsigned int maxWeights)
 {
 	file<> xmlFile(colladaFilepath.c_str());
 
@@ -31,5 +31,5 @@ AnimatedModelData ColladaLoader::loadColladaModel(const string& colladaFilepath,
 	GeometryLoader* modelLoader = new GeometryLoader(root->first_node("library_geometries\0"), skinningData.verticesSkinData);
 	MeshData meshData = modelLoader->extractModelData();
 
-	return AnimatedModelData(meshData, jointsData);
+	return new AnimatedModelData(meshData, jointsData);
 }

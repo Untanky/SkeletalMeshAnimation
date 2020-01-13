@@ -26,16 +26,20 @@
    // build the robot scenegraph
 Node* Robot::buildRobot() {
 
-	AnimatedMesh* animatedMesh = &AnimatedModelLoader::loadAnimatedMesh("meshes/model.dae", "");
+	AnimatedMesh* animatedMesh = AnimatedModelLoader::loadAnimatedMesh("meshes/model.dae", "");
 
 	// mesh
 	TriangleMesh* mesh = new TriangleMesh("meshes/cube.obj");
+
+	Mesh* animatedMeshAsMesh = (Mesh*)animatedMesh;
 
 	// material parameters
 	Material material = { glm::vec4(0.5, 0.5, 0.5, 1.0),
 						glm::vec4(0.5, 0.5, 0.5, 1.0),
 						glm::vec4(0.5, 0.5, 0.5, 1.0),
 						3.0f };
+
+	Node* animatedModel = new Node(animatedMeshAsMesh, material, 0, -400, 0, 100, 100, 100, 0, 0, 0, -45, 0, 0);
 
 	// torso attributes and initial position.
 	// for parameters of constructor and their meanings,
@@ -119,5 +123,5 @@ Node* Robot::buildRobot() {
 	// END XXX
 
 	// return root node
-	return torso;
+	return animatedModel;
 }

@@ -34,9 +34,9 @@ SceneGraph::SceneGraph(Node* root)
 {
 	root->select();
 
-	colorizeShader.loadVertexShader("shaders/color.vert");
+	colorizeShader.loadVertexShader("shaders/skeletal.vert");
 	colorizeShader.compileVertexShader();
-	colorizeShader.loadFragmentShader("shaders/color.frag");
+	colorizeShader.loadFragmentShader("shaders/skeletal.frag");
 	colorizeShader.compileFragmentShader();
 	colorizeShader.bindVertexAttribute("position", TriangleMesh::attribVertex);
 	colorizeShader.link();

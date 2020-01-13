@@ -3,14 +3,14 @@
 #include "ColladaLoader.h"
 #include "AnimatedModelData.h"
 
-AnimatedMesh AnimatedModelLoader::loadAnimatedMesh(const std::string& meshFilepath, const std::string& textureFilepath)
+AnimatedMesh* AnimatedModelLoader::loadAnimatedMesh(const std::string& meshFilepath, const std::string& textureFilepath)
 {
-	AnimatedModelData entityData = ColladaLoader::loadColladaModel(meshFilepath, 50);
-	VAO* model = createMesh(entityData.getMeshData());
-	SkeletonData skeletonData = entityData.getJointData();
+	AnimatedModelData* entityData = ColladaLoader::loadColladaModel(meshFilepath, 50);
+	VAO* model = createMesh(entityData->getMeshData());
+	SkeletonData skeletonData = entityData->getJointData();
 	Joint* headJoint = createJoints(skeletonData.headJoint, true);
 	Texture* texture = loadTexture(textureFilepath);
-	return AnimatedMesh(model, texture, headJoint, skeletonData.jointCount);
+	return new AnimatedMesh(model, texture, headJoint, skeletonData.jointCount);
 }
 
 VAO* AnimatedModelLoader::createMesh(MeshData meshData)
