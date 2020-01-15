@@ -12,6 +12,7 @@
 
 #include "Node.hpp"
 #include "GLSL.hpp"
+#include "Joint.h"
 
 class SceneGraph {
 
@@ -43,6 +44,8 @@ public:
 
 	Rotation::Mode getRotationMode(void);
 
+	Joint* getCurrentJoint() const;
+
 	// increment / decrement rotation of selected node
 	void rotate(glm::ivec3 angles);
 
@@ -67,6 +70,8 @@ protected:
 
 	// currently selected node
 	Node* selected;
+
+	Joint* currentJoint;
 
 	// rotation mode (extra assignment)
 	Rotation::Mode rotationMode;

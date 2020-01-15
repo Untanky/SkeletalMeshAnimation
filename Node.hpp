@@ -16,6 +16,7 @@ using namespace glm;
 
 #include "RotationMode.hpp"
 #include "Mesh.h"
+#include "Joint.h"
 #include "shaders/Material.h"
 
 // NOTE: each node in the scenegraph can have multiple 
@@ -96,6 +97,10 @@ public:
 	Node* getParent();
 	Node* getChild();
 
+	Joint* getCurrentJoint() const;
+
+	void setCurrentJoint(Joint* newCurrentJoint);
+
 	// select / deselect node
 	void select();
 	void deselect();
@@ -149,4 +154,6 @@ protected:
 	Node* child;
 
 	Mesh* mesh;
+
+	Joint* currentJoint;
 };

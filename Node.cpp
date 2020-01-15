@@ -167,6 +167,15 @@ Node* Node::getChild() {
 	return child;
 }
 
+Joint* Node::getCurrentJoint() const {
+	return currentJoint;
+}
+
+void Node::setCurrentJoint(Joint* newCurrentJoint) {
+
+	this->currentJoint = newCurrentJoint;
+}
+
 // select node
 void Node::select() {
 	selected = true;

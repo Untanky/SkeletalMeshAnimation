@@ -419,6 +419,9 @@ void Control::drawParameters(void) {
 	GLvoid* font = setFont("helvetica", 12);
 
 	ostringstream s;
+	s << "joint                    : " << sceneGraph->getCurrentJoint()->getName() << endl;
+	drawString(font, window->width() - 170, window->height() - 60, s.str());
+	s.str("");
 	s << "fov (f/F)               : " << fov << endl;
 	drawString(font, window->width() - 170, window->height() - 45, s.str());
 	s.str("");

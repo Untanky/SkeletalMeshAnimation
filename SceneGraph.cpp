@@ -33,6 +33,7 @@ SceneGraph::SceneGraph(Node* root)
 	, rotationMode(Rotation::MATRIX)
 {
 	root->select();
+	currentJoint = root->getCurrentJoint();
 
 	colorizeShader.loadVertexShader("shaders/color.vert");
 	colorizeShader.compileVertexShader();
@@ -142,6 +143,11 @@ void SceneGraph::setRotationMode(Rotation::Mode mode) {
 Rotation::Mode SceneGraph::getRotationMode(void) {
 
 	return rotationMode;
+}
+
+Joint* SceneGraph::getCurrentJoint() const {
+
+	return currentJoint;
 }
 
 // increment / decrement rotation of selected node
