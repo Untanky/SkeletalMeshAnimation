@@ -21,6 +21,11 @@ public:
 
 	inline const std::string& getName() const { return this->name; }
 
+	Joint* getPrevious();
+	Joint* getNext();
+	Joint* getParent();
+	Joint* getChild();
+
 	friend class AnimatedMesh;
 
 protected:

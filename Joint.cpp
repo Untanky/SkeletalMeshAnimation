@@ -25,3 +25,19 @@ void Joint::calcInverseBindTransform(const glm::mat4 parentTransform)
 	next->calcInverseBindTransform(parentTransform);
 	child->calcInverseBindTransform(bindTransform);
 }
+
+Joint* Joint::getPrevious() {
+	return this->previous;
+}
+
+Joint* Joint::getNext() {
+	return this->next;
+}
+
+Joint* Joint::getParent() {
+	return this->parent;
+}
+
+Joint* Joint::getChild() {
+	return this->child;
+}

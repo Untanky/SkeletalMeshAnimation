@@ -104,34 +104,63 @@ void SceneGraph::reset() {
 // (needed for node selection)
 void SceneGraph::up() {
 
-	if (selected->getParent() == NULL) return;
-	selected->deselect();
-	selected = selected->getParent();
-	selected->select();
+	if (Joint* joint = getCurrentJoint()) {
+		if (Joint* next = joint->getParent()) {
+			selected->setCurrentJoint(next);
+		}
+	}
+	else {
+		if (selected->getParent() == NULL) return;
+		selected->deselect();
+		selected = selected->getParent();
+		selected->select();
+	}
 }
 
 void SceneGraph::down() {
 
-	if (selected->getChild() == NULL) return;
-	selected->deselect();
-	selected = selected->getChild();
-	selected->select();
+	if (Joint * joint = getCurrentJoint()) {
+		if (Joint * next = joint->getChild()) {
+			cout << "Hello World!" << endl;
+			selected->setCurrentJoint(next);
+		}
+	}
+	else {
+		if (selected->getChild() == NULL) return;
+		selected->deselect();
+		selected = selected->getChild();
+		selected->select();
+	}
 }
 
 void SceneGraph::left() {
 
-	if (selected->getPrevious() == NULL) return;
-	selected->deselect();
-	selected = selected->getPrevious();
-	selected->select();
+	if (Joint * joint = getCurrentJoint()) {
+		if (Joint * next = joint->getPrevious()) {
+			selected->setCurrentJoint(next);
+		}
+	}
+	else {
+		if (selected->getPrevious() == NULL) return;
+		selected->deselect();
+		selected = selected->getPrevious();
+		selected->select();
+	}
 }
 
 void SceneGraph::right() {
 
-	if (selected->getNext() == NULL) return;
-	selected->deselect();
-	selected = selected->getNext();
-	selected->select();
+	if (Joint * joint = getCurrentJoint()) {
+		if (Joint * next = joint->getNext()) {
+			selected->setCurrentJoint(next);
+		}
+	}
+	else {
+		if (selected->getNext() == NULL) return;
+		selected->deselect();
+		selected = selected->getNext();
+		selected->select();
+	}
 }
 
 // setter and getter for rotation mode
@@ -147,16 +176,18 @@ Rotation::Mode SceneGraph::getRotationMode(void) {
 
 Joint* SceneGraph::getCurrentJoint() const {
 
-	return currentJoint;
+	return selected->getCurrentJoint();
 }
 
 // increment / decrement rotation of selected node
 void SceneGraph::rotate(ivec3 angles) {
-
-	selected->rotate(angles);
+	if (Joint* currentJoint = getCurrentJoint()) {
+		unsigned int id = currentJoint->getIndex();
+	}
+	else {
+		selected->rotate(angles);
+	}
 }
-
-float counter = 0;
 
 // traverse and draw the scenegraph from a given node
 // XXX: NEEDS TO BE IMPLEMENTED
@@ -169,12 +200,7 @@ void SceneGraph::traverse(Node* node, mat4 modelMatrix) {
 	for (int i = 0; i < 50; i++)
 	{
 		boneMatrix[i] = glm::mat4(1.0f);
-		boneMatrix[i] = glm::translate(glm::vec3(counter, 0, 0));
-
-		counter += 0.2;
 	}
-
-	cout << counter << endl;
 
 	setBoneMatrix(boneMatrix);
 
