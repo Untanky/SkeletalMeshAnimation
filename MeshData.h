@@ -1,6 +1,8 @@
 #pragma once
 
 #include "glm/glm.hpp"
+#include <iostream>
+using namespace std;
 #include <vector>
 
 constexpr int DIMENSIONS = 3;

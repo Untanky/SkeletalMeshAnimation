@@ -141,6 +141,9 @@ namespace glsl {
 		// Set a 4x4 matrix uniform parameter
 		void setUniform(const std::string& name, const glm::mat4& value);
 
+		// Set a 4x4 matrix uniform parameter
+		void setUniform(const std::string& name, glm::mat4 value[50]);
+
 		// bind an attribute to the same id used in glVertexAttrib* call
 		void bindVertexAttribute(const std::string& name, const int index);
 

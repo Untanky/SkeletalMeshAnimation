@@ -18,11 +18,11 @@ VAO* AnimatedModelLoader::createMesh(MeshData meshData)
 	VAO* vao = VAO::create();
 	vao->bind(std::vector<unsigned int>());
 	vao->createIndexBuffer(meshData.getIndices());
-	vao->createAttribute(0, meshData.getVertices(), 3);
-	vao->createAttribute(1, meshData.getTexCoords(), 2);
-	vao->createAttribute(2, meshData.getNormals(), 3);
-	vao->createUIntAttribute(3, meshData.getJointIds(), 3);
-	vao->createAttribute(4, meshData.getWeights(), 3);
+	vao->createAttribute(Mesh::attribVertex, meshData.getVertices(), 3);
+	vao->createAttribute(Mesh::attribTexCoord, meshData.getTexCoords(), 2);
+	vao->createAttribute(Mesh::attribNormal, meshData.getNormals(), 3);
+	vao->createUIntAttribute(Mesh::attribJointIndices, meshData.getJointIds(), 3);
+	vao->createAttribute(Mesh::attribWeights, meshData.getWeights(), 3);
 	vao->unbind(std::vector<unsigned int>());
 	return vao;
 }

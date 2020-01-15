@@ -59,7 +59,7 @@ std::vector<std::pair< unsigned int, std::string> >Control::menuEntries = { {Men
 
 void Control::init() {
 
-	const std::string version = "#version 120\n";
+	const std::string version = "#version 330\n";
 
 	diffuseShader.addVertexShader(version);
 	diffuseShader.loadVertexShader("shaders/Material.h");
@@ -69,8 +69,11 @@ void Control::init() {
 	diffuseShader.addFragmentShader(version);
 	diffuseShader.loadFragmentShader("shaders/diffuse.frag");
 	diffuseShader.compileFragmentShader();
-	diffuseShader.bindVertexAttribute("position", TriangleMesh::attribVertex);
-	diffuseShader.bindVertexAttribute("normal", TriangleMesh::attribNormal);
+	diffuseShader.bindVertexAttribute("position", Mesh::attribVertex);
+	diffuseShader.bindVertexAttribute("normal", Mesh::attribNormal);
+	diffuseShader.bindVertexAttribute("textureCoords", Mesh::attribTexCoord);
+	diffuseShader.bindVertexAttribute("jointIndices", Mesh::attribJointIndices);
+	diffuseShader.bindVertexAttribute("weights", Mesh::attribWeights);
 	diffuseShader.link();
 	diffuseShader.bind();
 	diffuseShader.setUniform("lightSource.position", lightSource.position);

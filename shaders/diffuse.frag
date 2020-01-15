@@ -1,6 +1,8 @@
-varying vec4 color;
+in vec4 inColor;
+
+out vec4 outColor;
 
 void main(void){
 
-  gl_FragColor= color;			
+  outColor = inColor;			
  }

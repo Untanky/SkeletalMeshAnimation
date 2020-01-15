@@ -13,11 +13,11 @@ AnimatedMesh::~AnimatedMesh()
 void AnimatedMesh::draw()
 {
 	std::vector<unsigned int> bindIndices;
-	bindIndices.push_back(0);
-	bindIndices.push_back(1);
-	bindIndices.push_back(2);
-	bindIndices.push_back(3);
-	bindIndices.push_back(4);
+	bindIndices.push_back(Mesh::attribVertex);
+	bindIndices.push_back(Mesh::attribNormal);
+	bindIndices.push_back(Mesh::attribTexCoord);
+	bindIndices.push_back(Mesh::attribJointIndices);
+	bindIndices.push_back(Mesh::attribWeights);
 
 	this->model->bind(bindIndices);
 	glDrawElements(GL_TRIANGLES, model->getIndexCount(), GL_UNSIGNED_INT, 0);

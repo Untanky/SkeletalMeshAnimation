@@ -34,6 +34,8 @@ public:
 	void setViewMatrix(glm::mat4 viewMatrix);
 	void setProjectionMatrix(glm::mat4 projectionMatrix);
 
+	void setBoneMatrix(glm::mat4 boneMatrix[15]);
+
 	void setShader(glsl::Shader* shader);
 
 	// setter and getter for rotation mode

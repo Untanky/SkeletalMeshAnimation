@@ -15,6 +15,7 @@
 #include "GLError.hpp"
 
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 using namespace std;
 
@@ -290,6 +291,12 @@ void glsl::Shader::setUniform(const string& name, const glm::mat4& value) {
 
 	int id = getUniformBinding(name);
 	glUniformMatrix4fv(id, 1, false, &value[0][0]);
+}
+
+void glsl::Shader::setUniform(const string& name, glm::mat4 value[50]) {
+
+	int id = getUniformBinding(name);
+	glUniformMatrix4fv(id, 15, false, &value[0][0][0]);
 }
 
 void glsl::Shader::bindVertexAttribute(const string& name, int id) {

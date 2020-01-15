@@ -86,7 +86,7 @@ void VAO::createUIntAttribute(int attribute, std::vector<unsigned int> data, int
 	VBO* dataVBO = VBO::create(GL_ARRAY_BUFFER);
 	dataVBO->bind();
 	dataVBO->storeData(data);
-	glVertexAttribIPointer(attribute, attrSize, GL_INT, attrSize * BYTES_PET_INT, 0);
+	glVertexAttribIPointer(attribute, attrSize, GL_UNSIGNED_INT, attrSize * BYTES_PET_INT, 0);
 	dataVBO->unbind();
 	dataVBOs.push_back(dataVBO);
 }

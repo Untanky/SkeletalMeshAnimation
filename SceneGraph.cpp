@@ -34,9 +34,9 @@ SceneGraph::SceneGraph(Node* root)
 {
 	root->select();
 
-	colorizeShader.loadVertexShader("shaders/skeletal.vert");
+	colorizeShader.loadVertexShader("shaders/color.vert");
 	colorizeShader.compileVertexShader();
-	colorizeShader.loadFragmentShader("shaders/skeletal.frag");
+	colorizeShader.loadFragmentShader("shaders/color.frag");
 	colorizeShader.compileFragmentShader();
 	colorizeShader.bindVertexAttribute("position", TriangleMesh::attribVertex);
 	colorizeShader.link();
@@ -71,6 +71,13 @@ void SceneGraph::setProjectionMatrix(glm::mat4 projectionMatrix) {
 	colorizeShader.bind();
 	colorizeShader.setUniform("projectionMatrix", projectionMatrix);
 	colorizeShader.bind();
+}
+
+void SceneGraph::setBoneMatrix(glm::mat4 boneMatrix[15]) {
+
+	shader->bind(); 
+	shader->setUniform("jointTransforms", boneMatrix);
+	shader->bind();
 }
 
 void SceneGraph::setShader(glsl::Shader* shader) {
@@ -143,12 +150,27 @@ void SceneGraph::rotate(ivec3 angles) {
 	selected->rotate(angles);
 }
 
+float counter = 0;
 
 // traverse and draw the scenegraph from a given node
 // XXX: NEEDS TO BE IMPLEMENTED
 void SceneGraph::traverse(Node* node, mat4 modelMatrix) {
 
 	if (node == NULL) return;
+
+	glm::mat4 boneMatrix[50];
+
+	for (int i = 0; i < 50; i++)
+	{
+		boneMatrix[i] = glm::mat4(1.0f);
+		boneMatrix[i] = glm::translate(glm::vec3(counter, 0, 0));
+
+		counter += 0.2;
+	}
+
+	cout << counter << endl;
+
+	setBoneMatrix(boneMatrix);
 
 	// traverse possible siblings
 	traverse(node->getNext(), modelMatrix);
