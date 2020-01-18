@@ -27,6 +27,7 @@ using namespace std;
 #include "Control.hpp"
 #include "Context.hpp"
 #include "InputManager.hpp"
+#include "Cowboy.h"
 #include "Robot.hpp"
 #include "TriangleMesh.hpp"
 
@@ -419,9 +420,11 @@ void Control::drawParameters(void) {
 	GLvoid* font = setFont("helvetica", 12);
 
 	ostringstream s;
-	s << "joint                    : " << sceneGraph->getCurrentJoint()->getName() << endl;
-	drawString(font, window->width() - 170, window->height() - 60, s.str());
-	s.str("");
+	if (sceneGraph->getCurrentJoint()) {
+		s << "joint                    : " << sceneGraph->getCurrentJoint()->getName() << endl;
+		drawString(font, window->width() - 170, window->height() - 60, s.str());
+		s.str("");
+	}
 	s << "fov (f/F)               : " << fov << endl;
 	drawString(font, window->width() - 170, window->height() - 45, s.str());
 	s.str("");
@@ -440,10 +443,11 @@ int main(int argc, char** argv) {
 	OpenGLContext<Control>::init(argc, argv);
 
 	//  build the robot hierarchy (see robot.cpp)
+	// AnimatedMeshNode* root = Cowboy::buildCowboy();
 	Node* root = Robot::buildRobot();
 
 	//make scenegraph
-	SceneGraph* sceneGraph = new SceneGraph(root);
+	SceneGraph* sceneGraph = new SceneGraph((Node*)root);
 	Control::addSceneGraph(sceneGraph);
 
 	//start event loop

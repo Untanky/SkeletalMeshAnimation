@@ -155,10 +155,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedMesh.cpp" />
+    <ClCompile Include="AnimatedMeshNode.cpp" />
     <ClCompile Include="AnimatedModelLoader.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ColladaLoader.cpp" />
     <ClCompile Include="Control.cpp" />
+    <ClCompile Include="Cowboy.cpp" />
     <ClCompile Include="GeometryLoader.cpp" />
     <ClCompile Include="GLError.cpp" />
     <ClCompile Include="GLSL.cpp" />
@@ -177,12 +179,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMesh.h" />
+    <ClInclude Include="AnimatedMeshNode.h" />
     <ClInclude Include="AnimatedModelData.h" />
     <ClInclude Include="AnimatedModelLoader.h" />
     <ClInclude Include="Application.hpp" />
     <ClInclude Include="ColladaLoader.h" />
     <ClInclude Include="Context.hpp" />
     <ClInclude Include="Control.hpp" />
+    <ClInclude Include="Cowboy.h" />
     <ClInclude Include="GeometryLoader.h" />
     <ClInclude Include="GLError.hpp" />
     <ClInclude Include="GLIncludes.hpp" />
@@ -196,7 +200,6 @@
     <ClInclude Include="Scenegraph.hpp" />
     <ClInclude Include="RotationMode.hpp" />
     <ClInclude Include="Debug.hpp" />
-    <ClInclude Include="Shaders.hpp" />
     <ClInclude Include="SkeletonData.h" />
     <ClInclude Include="SkeletonLoader.h" />
     <ClInclude Include="SkinLoader.h" />

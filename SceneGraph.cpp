@@ -33,7 +33,6 @@ SceneGraph::SceneGraph(Node* root)
 	, rotationMode(Rotation::MATRIX)
 {
 	root->select();
-	currentJoint = root->getCurrentJoint();
 
 	colorizeShader.loadVertexShader("shaders/color.vert");
 	colorizeShader.compileVertexShader();
@@ -106,7 +105,7 @@ void SceneGraph::up() {
 
 	if (Joint* joint = getCurrentJoint()) {
 		if (Joint* next = joint->getParent()) {
-			selected->setCurrentJoint(next);
+
 		}
 	}
 	else {
@@ -121,8 +120,7 @@ void SceneGraph::down() {
 
 	if (Joint * joint = getCurrentJoint()) {
 		if (Joint * next = joint->getChild()) {
-			cout << "Hello World!" << endl;
-			selected->setCurrentJoint(next);
+
 		}
 	}
 	else {
@@ -137,7 +135,7 @@ void SceneGraph::left() {
 
 	if (Joint * joint = getCurrentJoint()) {
 		if (Joint * next = joint->getPrevious()) {
-			selected->setCurrentJoint(next);
+
 		}
 	}
 	else {
@@ -152,7 +150,7 @@ void SceneGraph::right() {
 
 	if (Joint * joint = getCurrentJoint()) {
 		if (Joint * next = joint->getNext()) {
-			selected->setCurrentJoint(next);
+
 		}
 	}
 	else {
@@ -176,7 +174,7 @@ Rotation::Mode SceneGraph::getRotationMode(void) {
 
 Joint* SceneGraph::getCurrentJoint() const {
 
-	return selected->getCurrentJoint();
+	return 0;
 }
 
 // increment / decrement rotation of selected node

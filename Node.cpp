@@ -121,8 +121,8 @@ glm::mat4 Node::transform(Rotation::Mode rotationMode) {
 
 		// apply this node's rotation, use Euler angles
 		transformation *= glm::rotate(radians((float)eulerAngles.x), vec3(1, 0, 0));
-		transformation *= glm::rotate(radians((float)eulerAngles.x), vec3(1, 0, 0));
-		transformation *= glm::rotate(radians((float)eulerAngles.x), vec3(1, 0, 0));
+		transformation *= glm::rotate(radians((float)eulerAngles.y), vec3(0, 1, 0));
+		transformation *= glm::rotate(radians((float)eulerAngles.z), vec3(0, 0, 1));
 	}
 	else {
 
@@ -165,15 +165,6 @@ Node* Node::getParent() {
 // getter for child pointer
 Node* Node::getChild() {
 	return child;
-}
-
-Joint* Node::getCurrentJoint() const {
-	return currentJoint;
-}
-
-void Node::setCurrentJoint(Joint* newCurrentJoint) {
-
-	this->currentJoint = newCurrentJoint;
 }
 
 // select node

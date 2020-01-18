@@ -71,8 +71,6 @@ protected:
 	// currently selected node
 	Node* selected;
 
-	Joint* currentJoint;
-
 	// rotation mode (extra assignment)
 	Rotation::Mode rotationMode;
 

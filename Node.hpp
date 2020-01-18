@@ -68,14 +68,14 @@ public:
 		float jointx, float jointy, float jointz,
 		float rotx, float roty, float rotz);
 
-	// sets the parent of this node
-	void setParent(Node* parent);
+	// destructor
+	~Node();
 
 	// scenegraph has access to protected functions
 	friend class SceneGraph;
 
-	// destructor
-	~Node();
+	// increment / decrement Euler rotation
+	void rotate(glm::ivec3 angles);
 
 	// transform an individual node
 	// according to its position, 
@@ -84,9 +84,6 @@ public:
 
 	// draw an individual node
 	void draw(void);
-
-	// increment / decrement Euler rotation
-	void rotate(glm::ivec3 angles);
 
 	glm::mat4 getRotation(void);
 	void setRotation(glm::mat4 r);
@@ -97,9 +94,8 @@ public:
 	Node* getParent();
 	Node* getChild();
 
-	Joint* getCurrentJoint() const;
-
-	void setCurrentJoint(Joint* newCurrentJoint);
+	// sets the parent of this node
+	void setParent(Node* parent);
 
 	// select / deselect node
 	void select();
@@ -154,6 +150,4 @@ protected:
 	Node* child;
 
 	Mesh* mesh;
-
-	Joint* currentJoint;
 };

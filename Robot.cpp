@@ -12,6 +12,7 @@
 #include "TriangleMesh.hpp"
 #include "AnimatedMesh.h"
 #include "AnimatedModelLoader.h"
+#include "AnimatedMeshNode.h"
 
    // nodes of the scenegraph
 
@@ -35,7 +36,8 @@ Node* Robot::buildRobot() {
 						3.0f };
 
 	Node* animatedModel = new Node((Mesh*)animatedMesh, material, 0, -400, 0, 100, 100, 100, 0, 0, 0, -45, 0, 0);
-	animatedModel->setCurrentJoint(animatedMesh->getRootJoint());
-	
-	return animatedModel;
+	//AnimatedMeshNode* animatedModel = new AnimatedMeshNode(animatedMesh, material, vec3(0, -400, 0), vec3(1, 1, 1), vec3(-45, 0, 0));
+
+
+	return (Node*)animatedModel;
 }

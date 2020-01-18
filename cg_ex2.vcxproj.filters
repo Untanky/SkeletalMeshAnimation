@@ -46,6 +46,36 @@
     <Filter Include="Header Files\Components">
       <UniqueIdentifier>{d1114950-809e-4f14-b5f7-f349d0936502}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SkeletonCode\GLBasics">
+      <UniqueIdentifier>{5fc7e5fc-d7c5-4731-83b3-03eeea9f605b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SkeletonCode\Application">
+      <UniqueIdentifier>{4f3b02d3-0dac-41a3-a741-26c3ea573d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SkeletonCode\Scene">
+      <UniqueIdentifier>{d6e54da5-07a7-41db-b4da-0ab9b6a86143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SkeletonCode\Rendering">
+      <UniqueIdentifier>{42e5bb9a-2e6e-4eb0-ac5e-74a788526d44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SkeletonCode\Component">
+      <UniqueIdentifier>{e8762c13-04f7-4a21-9389-94207e026de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SkeletonCode\GLBasics">
+      <UniqueIdentifier>{32ecce95-ac1b-4618-b755-1e6d3af486db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SkeletonCode\Application">
+      <UniqueIdentifier>{f578def0-b620-4bb4-9510-0efe9f68026a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SkeletonCode\Rendering">
+      <UniqueIdentifier>{3a7e14d7-4653-4b83-bf0d-10f1de322416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SkeletonCode\Scene">
+      <UniqueIdentifier>{5a83f7a2-e7a5-4de8-8c1a-ebc3386b0c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SkeletonCode\Component">
+      <UniqueIdentifier>{588268ca-3908-41d2-b03e-5cf47fad12c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedMesh.cpp">
@@ -60,38 +90,11 @@
     <ClCompile Include="VAO.cpp">
       <Filter>Source Files\General</Filter>
     </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
-    <ClCompile Include="Control.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
-    <ClCompile Include="GLError.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
-    <ClCompile Include="GLSL.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
     <ClCompile Include="Robot.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenegraph.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
-    <ClCompile Include="TriangleMesh.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
       <Filter>Source Files\SkeletonCode</Filter>
     </ClCompile>
     <ClCompile Include="VBO.cpp">
       <Filter>Source Files\General</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\SkeletonCode</Filter>
     </ClCompile>
     <ClCompile Include="ColladaLoader.cpp">
       <Filter>Source Files\Animation\Loading</Filter>
@@ -108,6 +111,39 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="GLError.cpp">
+      <Filter>Source Files\SkeletonCode\GLBasics</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\SkeletonCode\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\SkeletonCode\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSL.cpp">
+      <Filter>Source Files\SkeletonCode\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\SkeletonCode\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files\SkeletonCode\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenegraph.cpp">
+      <Filter>Source Files\SkeletonCode\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Control.cpp">
+      <Filter>Source Files\SkeletonCode\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleMesh.cpp">
+      <Filter>Source Files\SkeletonCode\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedMeshNode.cpp">
+      <Filter>Source Files\SkeletonCode\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Cowboy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedMesh.h">
@@ -122,53 +158,8 @@
     <ClInclude Include="VAO.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
-    <ClInclude Include="Application.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Context.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Control.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="GLError.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="GLIncludes.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="GLSL.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Robot.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationMode.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Scenegraph.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Shaders.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="TriangleMesh.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
-    </ClInclude>
     <ClInclude Include="VBO.h">
       <Filter>Header Files\General</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.hpp">
-      <Filter>Header Files\SkeletonCode</Filter>
     </ClInclude>
     <ClInclude Include="ColladaLoader.h">
       <Filter>Header Files\Animation\Loading</Filter>
@@ -205,6 +196,54 @@
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GLError.hpp">
+      <Filter>Header Files\SkeletonCode\GLBasics</Filter>
+    </ClInclude>
+    <ClInclude Include="GLIncludes.hpp">
+      <Filter>Header Files\SkeletonCode\GLBasics</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.hpp">
+      <Filter>Header Files\SkeletonCode\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.hpp">
+      <Filter>Header Files\SkeletonCode\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.hpp">
+      <Filter>Header Files\SkeletonCode\GLBasics</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSL.hpp">
+      <Filter>Header Files\SkeletonCode\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.hpp">
+      <Filter>Header Files\SkeletonCode\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Robot.hpp">
+      <Filter>Header Files\SkeletonCode</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationMode.hpp">
+      <Filter>Header Files\SkeletonCode\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenegraph.hpp">
+      <Filter>Header Files\SkeletonCode\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.hpp">
+      <Filter>Header Files\SkeletonCode\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleMesh.hpp">
+      <Filter>Header Files\SkeletonCode\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.hpp">
+      <Filter>Header Files\SkeletonCode\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Control.hpp">
+      <Filter>Header Files\SkeletonCode\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedMeshNode.h">
+      <Filter>Header Files\SkeletonCode\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Cowboy.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
