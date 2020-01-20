@@ -1,12 +1,12 @@
 #pragma once
 
-#include "AnimatedMeshNode.h"
+#include "AnimatedMesh.h"
 
 class Cowboy
 {
 public:
 
 	// construct robot hierarchy
-	static AnimatedMeshNode* buildCowboy();
+	static AnimatedMesh* buildCowboy();
 };
 

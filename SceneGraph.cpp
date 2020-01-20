@@ -27,12 +27,11 @@
 using namespace std;
 using namespace glm;
 
-SceneGraph::SceneGraph(Node* root)
-	: root(root)
-	, selected(root)
-	, rotationMode(Rotation::MATRIX)
+SceneGraph::SceneGraph(AnimatedMesh* mesh)
+	: mesh(mesh),
+	currentJoint(mesh->getRootJoint()),
+	rotationMode(Rotation::MATRIX)
 {
-	root->select();
 
 	colorizeShader.loadVertexShader("shaders/color.vert");
 	colorizeShader.compileVertexShader();
@@ -44,7 +43,7 @@ SceneGraph::SceneGraph(Node* root)
 
 SceneGraph::~SceneGraph() {
 
-	clear(root);
+	delete mesh;
 }
 
 void SceneGraph::setViewMatrix(glm::mat4 viewMatrix) {
@@ -73,7 +72,8 @@ void SceneGraph::setProjectionMatrix(glm::mat4 projectionMatrix) {
 	colorizeShader.bind();
 }
 
-void SceneGraph::setBoneMatrix(glm::mat4 boneMatrix[15]) {
+void SceneGraph::setBoneMatrix(glm::mat4* boneMatrix) {
+
 
 	shader->bind(); 
 	shader->setUniform("jointTransforms", boneMatrix);
@@ -89,75 +89,43 @@ void SceneGraph::setShader(glsl::Shader* shader) {
 // (see helper function)
 void SceneGraph::traverse() {
 
-	traverse(root, mat4(1));
+	traverse(mat4(1));
 }
 
 // reset all rotations in the scenegraph
 // nothing to do here
 // (see helper function)
 void SceneGraph::reset() {
-	reset(root);
+	mesh->getRootJoint()->reset();
 }
 
 // navigation in tree
 // (needed for node selection)
 void SceneGraph::up() {
 
-	if (Joint* joint = getCurrentJoint()) {
-		if (Joint* next = joint->getParent()) {
-
-		}
-	}
-	else {
-		if (selected->getParent() == NULL) return;
-		selected->deselect();
-		selected = selected->getParent();
-		selected->select();
+	if (Joint* parent = getCurrentJoint()->getParent()) {
+		currentJoint = parent;
 	}
 }
 
 void SceneGraph::down() {
 
-	if (Joint * joint = getCurrentJoint()) {
-		if (Joint * next = joint->getChild()) {
-
-		}
-	}
-	else {
-		if (selected->getChild() == NULL) return;
-		selected->deselect();
-		selected = selected->getChild();
-		selected->select();
+	if (Joint* child = getCurrentJoint()->getChild()) {
+		currentJoint = child;
 	}
 }
 
 void SceneGraph::left() {
 
-	if (Joint * joint = getCurrentJoint()) {
-		if (Joint * next = joint->getPrevious()) {
-
-		}
-	}
-	else {
-		if (selected->getPrevious() == NULL) return;
-		selected->deselect();
-		selected = selected->getPrevious();
-		selected->select();
+	if (Joint * previousSibling = getCurrentJoint()->getPrevious()) {
+		currentJoint = previousSibling;
 	}
 }
 
 void SceneGraph::right() {
 
-	if (Joint * joint = getCurrentJoint()) {
-		if (Joint * next = joint->getNext()) {
-
-		}
-	}
-	else {
-		if (selected->getNext() == NULL) return;
-		selected->deselect();
-		selected = selected->getNext();
-		selected->select();
+	if (Joint * nextSibling = getCurrentJoint()->getNext()) {
+		currentJoint = nextSibling;
 	}
 }
 
@@ -174,63 +142,60 @@ Rotation::Mode SceneGraph::getRotationMode(void) {
 
 Joint* SceneGraph::getCurrentJoint() const {
 
-	return 0;
+	return this->currentJoint;
 }
 
 // increment / decrement rotation of selected node
 void SceneGraph::rotate(ivec3 angles) {
-	if (Joint* currentJoint = getCurrentJoint()) {
-		unsigned int id = currentJoint->getIndex();
-	}
-	else {
-		selected->rotate(angles);
+
+	if (Joint * currentJoint = getCurrentJoint()) {
+		mat4 rotation = mat4(1.0f);
+		rotation = glm::rotate(rotation, radians((float)angles.x), vec3(1, 0, 0));
+		rotation = glm::rotate(rotation, radians((float)angles.y), vec3(0, 1, 0));
+		rotation = glm::rotate(rotation, radians((float)angles.z), vec3(0, 0, 1));
+		currentJoint->transform(rotation);
 	}
 }
 
 // traverse and draw the scenegraph from a given node
 // XXX: NEEDS TO BE IMPLEMENTED
-void SceneGraph::traverse(Node* node, mat4 modelMatrix) {
-
-	if (node == NULL) return;
-
+void SceneGraph::traverse(mat4 modelMatrix) {
+	
+	std::vector<glm::mat4> jointTransforms = mesh->getJointTransforms();
 	glm::mat4 boneMatrix[50];
 
 	for (int i = 0; i < 50; i++)
 	{
-		boneMatrix[i] = glm::mat4(1.0f);
+		if (i < jointTransforms.size())
+			boneMatrix[i] = jointTransforms[i];
+		else
+			boneMatrix[i] = mat4(1);
 	}
 
 	setBoneMatrix(boneMatrix);
 
-	// traverse possible siblings
-	traverse(node->getNext(), modelMatrix);
-
 	// apply local transformations
-	modelMatrix *= node->transform(rotationMode);
+	modelMatrix = translate(modelMatrix, vec3(0, -400, 0));
+	//modelMatrix = glm::rotate(modelMatrix, radians(-45.0f), vec3(1, 0, 0));
+	modelMatrix = scale(modelMatrix, vec3(100, 100, 100));
+	// TODO: modelMatrix *= transform;
+
+
+	// material parameters
+	Material material = { vec4(1, 0.15, 0.15, 1),
+						vec4(1, 0.15, 0.15, 1),
+						vec4(1, 0.15, 0.15, 1),
+						3.0f };
 
 	shader->bind();
-	shader->setUniform("modelMatrix", modelMatrix * glm::scale(node->dimension));
-	shader->setUniform("normalMatrix", mat3(inverse(transpose(modelMatrix * glm::scale(node->dimension)))));
-	shader->setUniform("material.ambient", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.ambient);
-	shader->setUniform("material.diffuse", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.diffuse);
-	shader->setUniform("material.specular", node == selected ? vec4(1, 0.15, 0.15, 1) : node->material.specular);
-	shader->setUniform("material.shininess", node->material.shininess);
-	node->draw();
+	shader->setUniform("modelMatrix", modelMatrix);
+	shader->setUniform("normalMatrix", mat3(inverse(transpose(modelMatrix))));
+	shader->setUniform("material.ambient", material.ambient);
+	shader->setUniform("material.diffuse", material.diffuse);
+	shader->setUniform("material.specular", material.specular);
+	shader->setUniform("material.shininess", material.shininess );
+	mesh->draw();
 	shader->unbind();
-
-	// continue concatenating transformations
-	// if this node has children
-	if (Node* child = node->getChild()) {
-		traverse(child, modelMatrix);
-	}
-}
-
-void SceneGraph::clear(Node* node) {
-
-	if (node == NULL) return;
-	clear(node->getNext());
-	clear(node->getChild());
-	delete node;
 }
 
 // reset the subtree corresponding 

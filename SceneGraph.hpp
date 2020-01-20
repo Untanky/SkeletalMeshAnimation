@@ -12,13 +12,14 @@
 
 #include "Node.hpp"
 #include "GLSL.hpp"
+#include "AnimatedMesh.h"
 #include "Joint.h"
 
 class SceneGraph {
 
 public:
 
-	SceneGraph(Node* root);
+	SceneGraph(AnimatedMesh* mesh);
 
 	~SceneGraph();
 
@@ -57,7 +58,7 @@ public:
 protected:
 
 	// traverse and draw the scenegraph from a given node
-	void traverse(Node* node, glm::mat4 modelMatrix);
+	void traverse(glm::mat4 modelMatrix);
 
 	// reset all rotations below given node
 	void reset(Node* node);
@@ -66,10 +67,14 @@ protected:
 	void clear(Node* node);
 
 	// root node
-	Node* root;
+	//Node* root;
 
 	// currently selected node
-	Node* selected;
+	//Node* selected;
+
+	AnimatedMesh* mesh;
+
+	Joint* currentJoint;
 
 	// rotation mode (extra assignment)
 	Rotation::Mode rotationMode;

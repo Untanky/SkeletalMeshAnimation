@@ -25,7 +25,7 @@ private:
 
 	JointData* extractMainData(xml_node<>* jointNode, bool isRoot);
 
-	float* convertData(vector<string>);
+	glm::mat4 convertData(vector<string>);
 
 	xml_node<>* armatureData;
 

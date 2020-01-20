@@ -45,14 +45,14 @@ JointData* SkeletonLoader::extractMainData(xml_node<>* jointNode, bool isRoot)
 	}
 	matrixData.push_back(rawData);
 
-	glm::mat4 matrix = glm::make_mat4(convertData(matrixData));
+	glm::mat4 matrix = glm::mat4(convertData(matrixData));
 	matrix = glm::transpose(matrix);
 
 	jointCount++;
 	return new JointData(index, nameId, matrix);
 }
 
-float* SkeletonLoader::convertData(vector<string> rawData)
+glm::mat4 SkeletonLoader::convertData(vector<string> rawData)
 {
 	float matrixData[16];
 
@@ -61,5 +61,5 @@ float* SkeletonLoader::convertData(vector<string> rawData)
 		matrixData[i] = stof(rawData[i]);
 	}
 
-	return matrixData;
+	return glm::make_mat4(matrixData);
 }

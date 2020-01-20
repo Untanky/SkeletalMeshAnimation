@@ -443,11 +443,11 @@ int main(int argc, char** argv) {
 	OpenGLContext<Control>::init(argc, argv);
 
 	//  build the robot hierarchy (see robot.cpp)
-	// AnimatedMeshNode* root = Cowboy::buildCowboy();
-	Node* root = Robot::buildRobot();
+	AnimatedMesh* mesh = Cowboy::buildCowboy();
+	//Node* root = Robot::buildRobot();
 
 	//make scenegraph
-	SceneGraph* sceneGraph = new SceneGraph((Node*)root);
+	SceneGraph* sceneGraph = new SceneGraph(mesh);
 	Control::addSceneGraph(sceneGraph);
 
 	//start event loop

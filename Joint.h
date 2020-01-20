@@ -9,6 +9,10 @@ class Joint
 public:
 	Joint(const unsigned int index, const std::string& name, glm::mat4 bindTransform);
 
+	void transform(glm::mat4 transformMatrix);
+
+	void reset();
+
 	void setParent(Joint* parentJoint);
 
 	inline const glm::mat4 getAnimatedTransform() const { return this->animatedTransform; }
@@ -45,5 +49,9 @@ protected:
 	glm::mat4 inverseBindTransform;
 
 	void calcInverseBindTransform(const glm::mat4 bindTransform);
+
+	static void transform(Joint* joint, glm::mat4 transformMatrix, bool isRoot);
+
+	static void reset(Joint* joint);
 };
 

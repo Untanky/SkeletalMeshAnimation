@@ -2,7 +2,9 @@
 
 AnimatedMesh::AnimatedMesh(VAO* mesh, Texture* texture, Joint* rootJoint, unsigned int numberOfJoints)
 	: model(mesh), texture(texture), rootJoint(rootJoint), numberOfJoints(numberOfJoints)
-{ }
+{
+	rootJoint->calcInverseBindTransform(glm::mat4(1.0f));
+}
 
 AnimatedMesh::~AnimatedMesh()
 {
@@ -42,6 +44,8 @@ void AnimatedMesh::createFlatTransformArrayFromJoints(Joint* headJoint, glm::mat
 {
 	matrices[headJoint->getIndex()] = headJoint->getAnimatedTransform();
 
-	createFlatTransformArrayFromJoints(headJoint->next, matrices);
-	createFlatTransformArrayFromJoints(headJoint->child, matrices);
+	if(headJoint->next)
+		createFlatTransformArrayFromJoints(headJoint->next, matrices);
+	if(headJoint->child)
+		createFlatTransformArrayFromJoints(headJoint->child, matrices);
 }
