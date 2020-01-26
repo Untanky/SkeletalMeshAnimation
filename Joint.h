@@ -48,9 +48,13 @@ protected:
 
 	glm::mat4 inverseBindTransform;
 
+	glm::mat4 jointTransform;
+
 	void calcInverseBindTransform(const glm::mat4 bindTransform);
 
-	static void transform(Joint* joint, glm::mat4 transformMatrix, bool isRoot);
+	static glm::mat4 getParentTransform(Joint* joint);
+
+	static void transform(Joint* joint, glm::mat4 transformMatrix, glm::mat4 parentTransform, bool isRoot);
 
 	static void reset(Joint* joint);
 };
