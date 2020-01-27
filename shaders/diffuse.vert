@@ -20,6 +20,7 @@ in vec3 weights;
 
 out vec2 pass_textureCoords;
 out vec3 pass_normal;
+out vec4 pass_diffuse;
        
 out vec4 inColor;
        
@@ -44,8 +45,7 @@ void main(){
 
   vec4 diffuse= dot(n, l)*lightSource.diffuse*material.diffuse;
 
-  inColor= diffuse + ambient;
-  //inColor = vec4(jointIndices, 1);
+  pass_diffuse = dot(n, l) * lightSource.diffuse;
 
    // transform to clip space
    gl_Position = projectionMatrix*viewMatrix*modelMatrix*totalLocalPos;
