@@ -188,8 +188,8 @@ void Control::keyPressed() {
 	// rotate selected node around 
 	// x,y and z axes with keypresses
 	switch (keyboard.key) {
-	case 'q':
-	case 'Q': exit(0);
+	case Keyboard::Key::ESC: 
+		exit(0);
 	case 'x':
 		sceneGraph->rotate(vec3(step, 0, 0));
 		window->redisplay();
@@ -212,6 +212,36 @@ void Control::keyPressed() {
 		break;
 	case 'Z':
 		sceneGraph->rotate(vec3(0, 0, -step));
+		window->redisplay();
+		break;
+	case 'w':
+	case 'W':
+		sceneGraph->translate(vec3(0, 0, step));
+		window->redisplay();
+		break;
+	case 'a':
+	case 'A':
+		sceneGraph->translate(vec3(step, 0, 0));
+		window->redisplay();
+		break;
+	case 's':
+	case 'S':
+		sceneGraph->translate(vec3(0, 0, -step));
+		window->redisplay();
+		break;
+	case 'd':
+	case 'D':
+		sceneGraph->translate(vec3(-step, 0, 0));
+		window->redisplay();
+		break;
+	case 'q':
+	case 'Q':
+		sceneGraph->translate(vec3(0, -step, 0));
+		window->redisplay();
+		break;
+	case 'e':
+	case 'E':
+		sceneGraph->translate(vec3(0, step, 0));
 		window->redisplay();
 		break;
 
@@ -256,13 +286,13 @@ void Control::keyPressed() {
 		window->redisplay();
 		break;
 
-	case 'd':
+	case 't':
 		cameraZ -= 10;
 		updateProjectionMatrix();
 		updateViewMatrix();
 		window->redisplay();
 		break;
-	case 'D':
+	case 'T':
 		cameraZ += 10;
 		updateProjectionMatrix();
 		updateViewMatrix();

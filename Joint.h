@@ -9,6 +9,12 @@ class Joint
 public:
 	Joint(const unsigned int index, const std::string& name, glm::mat4 bindTransform);
 
+	void translate(glm::vec3 translateVector);
+
+	void rotate(glm::vec3 eulerAngles);
+
+	void scale(glm::vec3 scaleVector);
+
 	void transform(glm::mat4 transformMatrix);
 
 	void reset();

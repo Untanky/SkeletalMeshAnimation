@@ -47,6 +47,9 @@ public:
 
 	Joint* getCurrentJoint() const;
 
+	// increment / decrement translation of selected node
+	void translate(glm::vec3 translation);
+
 	// increment / decrement rotation of selected node
 	void rotate(glm::ivec3 angles);
 

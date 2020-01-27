@@ -145,15 +145,19 @@ Joint* SceneGraph::getCurrentJoint() const {
 	return this->currentJoint;
 }
 
+// increment / decrement translation of selected node
+void SceneGraph::translate(vec3 translation) {
+
+	if (Joint* currentJoint = getCurrentJoint()) {
+		currentJoint->translate(translation);
+	}
+}
+
 // increment / decrement rotation of selected node
 void SceneGraph::rotate(ivec3 angles) {
 
-	if (Joint * currentJoint = getCurrentJoint()) {
-		mat4 rotation = mat4(1.0f);
-		rotation = glm::rotate(rotation, radians((float)angles.x), vec3(1, 0, 0));
-		rotation = glm::rotate(rotation, radians((float)angles.y), vec3(0, 1, 0));
-		rotation = glm::rotate(rotation, radians((float)angles.z), vec3(0, 0, 1));
-		currentJoint->transform(rotation);
+	if (Joint* currentJoint = getCurrentJoint()) {
+		currentJoint->rotate(vec3(angles));
 	}
 }
 
@@ -175,7 +179,7 @@ void SceneGraph::traverse(mat4 modelMatrix) {
 	setBoneMatrix(boneMatrix);
 
 	// apply local transformations
-	modelMatrix = translate(modelMatrix, vec3(0, -400, 0));
+	modelMatrix = glm::translate(modelMatrix, vec3(0, -400, 0));
 	//modelMatrix = glm::rotate(modelMatrix, radians(-45.0f), vec3(1, 0, 0));
 	modelMatrix = scale(modelMatrix, vec3(100, 100, 100));
 	// TODO: modelMatrix *= transform;

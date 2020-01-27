@@ -48,6 +48,10 @@ JointData* SkeletonLoader::extractMainData(xml_node<>* jointNode, bool isRoot)
 	glm::mat4 matrix = glm::mat4(convertData(matrixData));
 	matrix = glm::transpose(matrix);
 
+	if (isRoot) {
+		matrix = CORRECTION * matrix;
+	}
+
 	jointCount++;
 	return new JointData(index, nameId, matrix);
 }
