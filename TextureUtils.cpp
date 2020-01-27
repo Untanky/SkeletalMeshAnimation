@@ -12,7 +12,6 @@ TextureData* TextureUtils::decodeTextureFile(std::string file)
 	int nrChannels;
 	unsigned char* data = stbi_load(file.data(), &width, &height, &nrChannels, 0);
 
-
 	return new TextureData(data, width, height);
 }
 

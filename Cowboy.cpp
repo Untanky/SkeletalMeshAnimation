@@ -5,7 +5,7 @@
 
 AnimatedMesh* Cowboy::buildCowboy()
 {
-	AnimatedMesh* animatedMesh = AnimatedModelLoader::loadAnimatedMesh("meshes/model.dae", "meshes/diffuse.png");
+	AnimatedMesh* animatedMesh = AnimatedModelLoader::loadAnimatedMesh("meshes/model.dae", "meshes/diffuse1.png");
 
 	return animatedMesh;
 }
