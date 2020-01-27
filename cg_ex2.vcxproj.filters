@@ -123,9 +123,6 @@
     <ClCompile Include="GLSL.cpp">
       <Filter>Source Files\SkeletonCode\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\SkeletonCode\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Node.cpp">
       <Filter>Source Files\SkeletonCode\Scene</Filter>
     </ClCompile>
@@ -143,6 +140,15 @@
     </ClCompile>
     <ClCompile Include="Cowboy.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBuilder.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureUtils.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +233,6 @@
     <ClInclude Include="Scenegraph.hpp">
       <Filter>Header Files\SkeletonCode\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.hpp">
-      <Filter>Header Files\SkeletonCode\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="TriangleMesh.hpp">
       <Filter>Header Files\SkeletonCode\Component</Filter>
     </ClInclude>
@@ -244,6 +247,21 @@
     </ClInclude>
     <ClInclude Include="Cowboy.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBuilder.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureUtils.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureData.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

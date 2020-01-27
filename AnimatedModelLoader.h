@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Texture.h"
 #include "AnimatedMesh.h"
 #include "JointData.h"
 #include "MeshData.h"

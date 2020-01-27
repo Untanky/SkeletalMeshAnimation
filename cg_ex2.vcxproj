@@ -172,6 +172,8 @@
     <ClCompile Include="SkeletonLoader.cpp" />
     <ClCompile Include="SkinLoader.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureBuilder.cpp" />
+    <ClCompile Include="TextureUtils.cpp" />
     <ClCompile Include="TriangleMesh.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
@@ -204,7 +206,11 @@
     <ClInclude Include="SkeletonLoader.h" />
     <ClInclude Include="SkinLoader.h" />
     <ClInclude Include="SkinningData.h" />
-    <ClInclude Include="Texture.hpp" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureBuilder.h" />
+    <ClInclude Include="TextureData.h" />
+    <ClInclude Include="TextureUtils.h" />
     <ClInclude Include="TriangleMesh.hpp" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />

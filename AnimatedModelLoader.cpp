@@ -43,5 +43,5 @@ Joint* AnimatedModelLoader::createJoints(JointData* jointData, bool isRoot)
 
 Texture* AnimatedModelLoader::loadTexture(const std::string& textureFilepath)
 {
-	return nullptr;
+	return Texture::newTexture(textureFilepath)->anisotropic()->create();
 }

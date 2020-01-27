@@ -3,7 +3,7 @@
 #include "Mesh.h"
 #include "Joint.h"
 #include "VAO.h"
-#include "Texture.hpp"
+#include "Texture.h"
 #include <vector>
 
 class AnimatedMesh : Mesh
