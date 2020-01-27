@@ -50,7 +50,7 @@ void GeometryLoader::readPositions()
 		float x = stof(posDataList[i * 3]);
 		float y = stof(posDataList[i * 3 + 1]);
 		float z = stof(posDataList[i * 3 + 2]);
-		glm::vec4 pos = glm::vec4(x, y, z, 0.f);
+		glm::vec4 pos = glm::vec4(x, y, z, 1.f);
 		pos = CORRECTION * pos;
 		vertices.push_back(Vertex(vertices.size(), glm::vec3(pos.x, pos.y, pos.z), vertexWeights[vertices.size()]));
 	}
@@ -136,10 +136,6 @@ void GeometryLoader::assembleVertices()
 		int positionIndex = stoi(indexData[i * typeCount]);
 		int normalIndex = stoi(indexData[i * typeCount + 1]);
 		int texCoordIndex = stoi(indexData[i * typeCount + 2]);
-		if (positionIndex == 0)
-		{
-			normalIndex = normalIndex;
-		}
 		processVertex(positionIndex, normalIndex, texCoordIndex);
 	}
 }
@@ -186,7 +182,7 @@ float GeometryLoader::convertDataToArray()
 		verticesArray.push_back(position.y);
 		verticesArray.push_back(position.z);
 		texCoordsArray.push_back(texCoord.x);
-		texCoordsArray.push_back(texCoord.y);
+		texCoordsArray.push_back(1 - texCoord.y);
 		normalsArray.push_back(normal.x);
 		normalsArray.push_back(normal.y);
 		normalsArray.push_back(normal.z);

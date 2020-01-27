@@ -21,6 +21,7 @@ void AnimatedMesh::draw()
 	bindIndices.push_back(Mesh::attribJointIndices);
 	bindIndices.push_back(Mesh::attribWeights);
 
+	this->texture->bindToUnit(0);
 	this->model->bind(bindIndices);
 	glDrawElements(GL_TRIANGLES, model->getIndexCount(), GL_UNSIGNED_INT, 0);
 	this->model->unbind(bindIndices);
