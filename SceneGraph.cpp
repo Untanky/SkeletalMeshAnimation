@@ -161,6 +161,14 @@ void SceneGraph::rotate(ivec3 angles) {
 	}
 }
 
+// increment / decrement rotation of selected node
+void SceneGraph::scale(vec3 angles) {
+
+	if (Joint* currentJoint = getCurrentJoint()) {
+		currentJoint->scale(vec3(angles));
+	}
+}
+
 // traverse and draw the scenegraph from a given node
 // XXX: NEEDS TO BE IMPLEMENTED
 void SceneGraph::traverse(mat4 modelMatrix) {
@@ -181,7 +189,7 @@ void SceneGraph::traverse(mat4 modelMatrix) {
 	// apply local transformations
 	modelMatrix = glm::translate(modelMatrix, vec3(0, -400, 0));
 	//modelMatrix = glm::rotate(modelMatrix, radians(-45.0f), vec3(1, 0, 0));
-	modelMatrix = scale(modelMatrix, vec3(100, 100, 100));
+	modelMatrix = glm::scale(modelMatrix, vec3(100, 100, 100));
 	// TODO: modelMatrix *= transform;
 
 
@@ -189,7 +197,7 @@ void SceneGraph::traverse(mat4 modelMatrix) {
 	Material material = { vec4(1, 0.15, 0.15, 1),
 						vec4(1, 0.15, 0.15, 1),
 						vec4(1, 0.15, 0.15, 1),
-						3.0f };
+						1.0f };
 
 	shader->bind();
 	shader->setUniform("modelMatrix", modelMatrix);

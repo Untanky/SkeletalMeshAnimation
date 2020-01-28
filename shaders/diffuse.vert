@@ -19,15 +19,18 @@ in uvec3 jointIndices;
 in vec3 weights;
 
 out vec2 pass_textureCoords;
-out vec3 pass_normal;
 out vec4 pass_diffuse;
+
+out vec3 pass_normalInterp;
+out vec3 pass_vertPos;
+
+out vec3 pass_ambient;
        
 out vec4 inColor;
        
-void main(){
-
-	vec4 totalLocalPos = vec4(0.0);
-	vec4 totalNormal = vec4(0.0);
+void deform(out vec4 totalLocalPos, out vec4 totalNormal) {
+	totalLocalPos = vec4(0.0);
+	totalNormal = vec4(0.0);
 
 	for(int i=0;i<MAX_WEIGHTS;i++){
 		mat4 jointTransform = jointTransforms[jointIndices[i]];
@@ -37,19 +40,33 @@ void main(){
 		vec4 worldNormal = jointTransform * vec4(normal, 0.0);
 		totalNormal += worldNormal * weights[i];
 	}
+}
 
-  vec4 ambient= lightSource.ambient*material.ambient;
+void shade(in vec4 totalLocalPos, in vec4 totalNormal) {
+	vec4 ambient= lightSource.ambient*material.ambient;
 
-  vec3 n= normalize(normalMatrix*totalNormal.xyz);
-  vec3 l= normalize(lightSource.position.xyz-(modelMatrix*totalLocalPos).xyz);
+	vec3 n= normalize(normalMatrix*totalNormal.xyz);
+	vec3 l= normalize(lightSource.position.xyz-(modelMatrix*totalLocalPos).xyz);
 
-  vec4 diffuse= dot(n, l)*lightSource.diffuse*material.diffuse;
-
-  pass_diffuse = dot(n, l) * lightSource.diffuse;
-
-   // transform to clip space
-   gl_Position = projectionMatrix*viewMatrix*modelMatrix*totalLocalPos;
+	vec4 diffuse= dot(n, l)*lightSource.diffuse*material.diffuse;
    
-	pass_normal = totalNormal.xyz;
+	pass_diffuse = dot(n, l) * lightSource.diffuse;
+}
+
+void main(){
+	vec4 totalLocalPos;
+	vec4 totalNormal;
+
+	deform(totalLocalPos, totalNormal);
+
+	shade(totalLocalPos, totalNormal);
+
+	// transform to clip space
+	vec4 vertPos4 = viewMatrix * modelMatrix * totalLocalPos;
+	gl_Position = projectionMatrix * vertPos4;
+
 	pass_textureCoords = textureCoords;
+
+	pass_vertPos = vec3(vertPos4) / vertPos4.w;
+	pass_normalInterp = normalMatrix * totalNormal.xyz;
 }

@@ -47,7 +47,7 @@ glsl::Shader Control::diffuseShader;
 LightSource Control::lightSource = { vec4(-1000.0, 1000.0, 1000.0, 1.0),
 				   vec4(1.0f, 1.0f, 1.0f, 1.0f),
 				   vec4(1.0f, 1.0f, 1.0f, 1.0f),
-				   vec4(1.0f, 1.0f, 1.0f, 1.0f) };
+				   vec4(0.2f, 0.2f, 0.2f, 1.0f) };
 
 SceneGraph* Control::sceneGraph = NULL;
 
@@ -68,6 +68,8 @@ void Control::init() {
 	diffuseShader.loadVertexShader("shaders/diffuse.vert");
 	diffuseShader.compileVertexShader();
 	diffuseShader.addFragmentShader(version);
+	diffuseShader.loadFragmentShader("shaders/Material.h");
+	diffuseShader.loadFragmentShader("shaders/LightSource.h");
 	diffuseShader.loadFragmentShader("shaders/diffuse.frag");
 	diffuseShader.compileFragmentShader();
 	diffuseShader.bindVertexAttribute("position", Mesh::attribVertex);
@@ -244,6 +246,13 @@ void Control::keyPressed() {
 		sceneGraph->translate(vec3(0, step, 0));
 		window->redisplay();
 		break;
+
+	case 'o':
+		sceneGraph->scale(vec3(0.5, 0.5, 0.5));
+		window->redisplay();
+	case 'O':
+		sceneGraph->scale(vec3(0.5, 0.5, 0.5));
+		window->redisplay();
 
 	case 'r':
 		sceneGraph->reset();
@@ -451,7 +460,7 @@ void Control::drawParameters(void) {
 
 	ostringstream s;
 	if (sceneGraph->getCurrentJoint()) {
-		s << "joint                    : " << sceneGraph->getCurrentJoint()->getName() << endl;
+		s << "joint: " << sceneGraph->getCurrentJoint()->getName() << endl;
 		drawString(font, window->width() - 170, window->height() - 60, s.str());
 		s.str("");
 	}

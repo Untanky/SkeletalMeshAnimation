@@ -53,6 +53,9 @@ public:
 	// increment / decrement rotation of selected node
 	void rotate(glm::ivec3 angles);
 
+	// increment / decrement scale of selected node
+	void scale(glm::vec3 scale);
+
 	// reset all rotations
 	void reset();
 
